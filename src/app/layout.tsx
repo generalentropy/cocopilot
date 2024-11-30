@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { AuthProvider } from "./AuthProvider";
 
 export const metadata: Metadata = {
-  title: "Cocopilot",
-  description: "Votre gestionnaire de poulailler",
+  title: "Cocopilot - Votre assistant de poulailler",
+  description: "Votre assistant de poulailler",
 };
 
 const inter = Inter({
@@ -19,10 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <AuthProvider>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
-      </html>
-    </AuthProvider>
+    <html lang="en">
+      <body className={inter.className}>{children}</body>
+    </html>
   );
 }

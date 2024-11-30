@@ -1,5 +1,9 @@
 import { ReactNode } from "react";
 
-export default function FrontLayout({ children }: { children: ReactNode }) {
-  return <>{children}</>;
+export default async function FrontLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  return <div className="flex justify-center">{children}</div>;
 }
