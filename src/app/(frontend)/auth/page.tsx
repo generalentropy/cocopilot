@@ -1,9 +1,11 @@
-import { LoginLink } from "@kinde-oss/kinde-auth-nextjs";
+"use client";
+
+import LoginCard from "@/components/dashboard/LoginCard";
 
 export default function AuthRoute() {
   return (
-    <div>
-      <LoginLink>Login</LoginLink>
+    <div className="flex flex-grow items-center justify-center">
+      <LoginCard />
     </div>
   );
 }
