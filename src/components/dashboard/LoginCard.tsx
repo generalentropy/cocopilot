@@ -14,10 +14,11 @@ export default function LoginCard() {
         <Button
           size="lg"
           className="w-full bg-amber-500 transition-colors hover:bg-amber-600"
+          asChild
         >
           <LoginLink> Se connecter</LoginLink>
         </Button>
-        <Button size="lg" className="w-full" variant="outline">
+        <Button size="lg" className="w-full" variant="outline" asChild>
           <RegisterLink> S&apos;inscrire</RegisterLink>
         </Button>
       </CardContent>
