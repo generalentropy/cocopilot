@@ -7,7 +7,7 @@ export default function LoginCard() {
     <Card className="mx-auto w-full max-w-md sm:p-8">
       <CardHeader>
         <CardTitle className="text-center text-2xl font-bold">
-          Choissisez une option pour continuer
+          Choisissez une option pour continuer
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">

@@ -23,7 +23,7 @@ export default function OnBoarding() {
               <p className="mx-auto max-w-[700px] text-gray-500 dark:text-gray-400 md:text-xl">
                 Gérez votre poulailler, suivez la santé de vos animaux, trackez
                 votre production, obtenez des statistiques, planifiez les soins,
-                et tout cela en un seul endroit 🪄
+                et tout cela en un seul endroit&nbsp;🪄
               </p>
             </div>
             <div className="space-x-4">
