@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="flex w-full shrink-0 flex-col items-center gap-2 border-t px-4 py-6 sm:flex-row md:px-6">
-      <p className="text-xs text-gray-500 dark:text-gray-400">
+    <footer className="flex w-full shrink-0 flex-col items-center gap-2 border-t px-2 py-6 sm:flex-row sm:px-4 md:px-6">
+      <p className="text-center text-xs text-gray-500 dark:text-gray-400">
         © {new Date().getFullYear()} cocopilot - Votre assistant de poulailler
         🐔
       </p>

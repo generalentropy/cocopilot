@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 export default function OnBoarding() {
   return (
     <div className="flex flex-grow flex-col justify-center">
-      <section className="flex min-h-full items-center justify-center py-12 md:py-24 lg:py-32 xl:py-48">
+      <section className="flex min-h-full items-center justify-center">
         <div className="flex justify-center px-4 md:px-6">
           <div className="flex flex-col items-center space-y-4 text-center">
             <div>
@@ -23,11 +23,14 @@ export default function OnBoarding() {
               <p className="mx-auto max-w-[700px] text-gray-500 dark:text-gray-400 md:text-xl">
                 Gérez votre poulailler, suivez la santé de vos animaux, trackez
                 votre production, obtenez des statistiques, planifiez les soins,
-                tout ça en un seul endroit 🪄
+                et tout cela en un seul endroit 🪄
               </p>
             </div>
             <div className="space-x-4">
-              <Button className="bg-amber-500 transition-colors hover:bg-amber-600">
+              <Button
+                className="bg-amber-500 transition-colors hover:bg-amber-600"
+                asChild
+              >
                 <Link href="/auth">Commencer</Link>
               </Button>
               <Button variant="outline">En savoir plus</Button>
