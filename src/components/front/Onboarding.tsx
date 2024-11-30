@@ -31,7 +31,7 @@ export default function OnBoarding() {
                 className="bg-amber-500 transition-colors hover:bg-amber-600"
                 asChild
               >
-                <Link href="/auth">Commencer</Link>
+                <Link href="/dashboard">Commencer</Link>
               </Button>
               <Button variant="outline">En savoir plus</Button>
             </div>
