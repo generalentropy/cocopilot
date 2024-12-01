@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Cocopilot - Votre assistant de poulailler",
-  description: "Votre assistant de poulailler",
+  description: "Cocopilot - Votre assistant de poulailler",
 };
 
 const inter = Inter({
@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <body className={inter.className}>{children}</body>
     </html>
   );
