@@ -1,6 +1,9 @@
 import Image from "next/image";
-import RegisterButton from "./RegisterButton";
-import LoginButton from "./LoginButton";
+import {
+  LoginLink,
+  RegisterLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
+import { Button } from "../ui/button";
 
 export default function OnBoarding() {
   return (
@@ -27,8 +30,16 @@ export default function OnBoarding() {
               </p>
             </div>
             <div className="space-x-4">
-              <RegisterButton />
-              <LoginButton />
+              <Button
+                className="bg-amber-500 transition-colors hover:bg-amber-600"
+                asChild
+              >
+                <RegisterLink>Commencer</RegisterLink>
+              </Button>
+
+              <Button asChild>
+                <LoginLink>Déja un compte ?</LoginLink>
+              </Button>
             </div>
           </div>
         </div>
