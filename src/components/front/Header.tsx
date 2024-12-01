@@ -6,10 +6,10 @@ export default function Header() {
     <header className="flex h-14 items-center px-4 lg:px-6">
       <Link className="flex items-center justify-center" href="/">
         <Image
-          src="logo-mini.svg"
+          src="cocopilot-logo.svg"
           alt="cocopilot logo"
-          width={30}
-          height={30}
+          width={34}
+          height={34}
         />
         <span className="ml-2 text-2xl font-black">cocopilot</span>
       </Link>

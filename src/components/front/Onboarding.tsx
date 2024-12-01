@@ -13,10 +13,10 @@ export default function OnBoarding() {
           <div className="flex flex-col items-center space-y-4 text-center">
             <div>
               <Image
-                src="logo-mini.svg"
+                src="cocopilot-logo.svg"
                 alt="cocopilot logo"
-                width={100}
-                height={100}
+                width={110}
+                height={110}
               />
             </div>
             <div className="space-y-2">
