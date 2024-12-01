@@ -36,6 +36,7 @@ async function main() {
       content: "This is the content of the first post.",
       published: true,
       authorId: user1.id, // Utiliser l'ID du premier utilisateur
+      user_id: "kp_5fe2bcc95b264171bb01a14ee391b46b",
     },
   });
 
@@ -44,11 +45,22 @@ async function main() {
       title: "Second Post",
       content: "Content of the second post.",
       published: false,
-      authorId: user2.id, // Utiliser l'ID du deuxième utilisateur
+      authorId: user1.id, // Utiliser l'ID du deuxième utilisateur
+      user_id: "kp_5fe2bcc95b264171bb01a14ee391b46b",
     },
   });
 
-  console.log("Posts created:", post1, post2);
+  const post3 = await prisma.post.create({
+    data: {
+      title: "3 Post",
+      content: "dslkdjks sldsdskld",
+      published: false,
+      authorId: user1.id, // Utiliser l'ID du deuxième utilisateur
+      user_id: "kp_5fe2bcc95b264171bb01a14ee391b46b",
+    },
+  });
+
+  console.log("Posts created:", post1, post2, post3);
 }
 
 main()
