@@ -20,12 +20,12 @@ export default function Header() {
         >
           Fonctionnalités
         </Link>
-        <Link
+        {/* <Link
           className="text-sm font-medium underline-offset-4 hover:underline"
           href="#pricing"
         >
           Tarifs
-        </Link>
+        </Link> */}
         <Link
           className="text-sm font-medium underline-offset-4 hover:underline"
           href="#about"
