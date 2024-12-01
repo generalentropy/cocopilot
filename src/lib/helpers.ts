@@ -7,3 +7,20 @@ export function generateRandomString(length = 5) {
   }
   return result;
 }
+
+export function getInitials(
+  firstName: string | null | undefined,
+  lastName: string | null | undefined,
+  email: string | null | undefined,
+): string {
+  const firstInitial = firstName ? firstName.charAt(0) : "";
+  const lastInitial = lastName ? lastName.charAt(0) : "";
+
+  let initials = `${firstInitial}${lastInitial}`.toUpperCase();
+
+  if (!initials && email) {
+    initials = email.substring(0, 2).toUpperCase();
+  }
+
+  return initials;
+}

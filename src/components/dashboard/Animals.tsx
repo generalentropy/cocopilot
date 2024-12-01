@@ -15,7 +15,7 @@ export default async function Animals() {
   const animals = await getData();
 
   return (
-    <div className="grid max-w-5xl grid-cols-3 justify-center gap-4 border border-red-500">
+    <div className="grid grid-cols-3">
       {animals.map((animal) => (
         <AnimalCard key={animal.id} animalData={animal} />
       ))}

@@ -24,9 +24,9 @@ export default function OnBoarding() {
                 Votre assistant tout-en-un
               </h1>
               <p className="mx-auto max-w-[700px] text-gray-500 dark:text-gray-400 md:text-xl">
-                Gérez votre poulailler, suivez la santé de vos animaux, trackez
-                votre production, obtenez des statistiques, planifiez les soins,
-                et tout cela en un seul endroit&nbsp;🪄
+                Gérez votre poulailler, suivez la santé de vos animaux,
+                monitorez votre production, obtenez des statistiques, planifiez
+                les soins, tout cela en un seul endroit&nbsp;🪄
               </p>
             </div>
             <div className="space-x-4">
