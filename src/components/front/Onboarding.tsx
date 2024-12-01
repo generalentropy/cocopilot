@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import RegisterButton from "./RegisterButton";
+import LoginButton from "./LoginButton";
 
 export default function OnBoarding() {
   return (
@@ -27,13 +27,8 @@ export default function OnBoarding() {
               </p>
             </div>
             <div className="space-x-4">
-              <Button
-                className="bg-amber-500 transition-colors hover:bg-amber-600"
-                asChild
-              >
-                <Link href="/dashboard">Commencer</Link>
-              </Button>
-              <Button variant="outline">En savoir plus</Button>
+              <RegisterButton />
+              <LoginButton />
             </div>
           </div>
         </div>
