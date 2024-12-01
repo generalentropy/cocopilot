@@ -1,4 +1,3 @@
-import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import { TailwindIndicator } from "@/components/dashboard/TailwindIndicator";
 import { ReactNode } from "react";
 
@@ -8,9 +7,8 @@ export default async function DashboardLoayout({
   children: ReactNode;
 }) {
   return (
-    <div className="flex justify-center border px-2">
+    <div className="grid h-screen grid-cols-[300px_1fr] grid-rows-[60px_1fr]">
       <TailwindIndicator />
-      <DashboardHeader />
       {children}
     </div>
   );
