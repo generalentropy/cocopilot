@@ -7,8 +7,8 @@ export default function DashboardRoute() {
   return (
     <div>
       Dashboard
-      <Button>
-        <LogoutLink>Logout</LogoutLink>
+      <Button asChild>
+        <LogoutLink>Se déconnecter</LogoutLink>
       </Button>
     </div>
   );
