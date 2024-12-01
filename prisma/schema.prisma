@@ -20,4 +20,61 @@ model User {
   firstName    String
   lastName     String
   profileImage String
+
+  ownedAnimals Animal[]
+}
+
+model Animal {
+  id           String       @id @default(uuid())
+  name         String?
+  weight       Int? // en grammes
+  race         ChickenBreed
+  age          Int // en mois
+  healthStatus HealthStatus
+  healthNotes  String? // Détails spécifiques sur l'état de santé
+  dateOfBirth  DateTime?
+  User         User?        @relation(fields: [userId], references: [id])
+  userId       String?
+}
+
+enum HealthStatus {
+  healthy // En bonne santé
+  injured // Blessée
+  sick // Malade
+  recovering // En convalescence
+  unknown // Statut inconnu
+}
+
+enum ChickenBreed {
+  leghorn
+  isaBrown
+  harco
+  sussex
+  rhodeIslandRed
+  cornish
+  faverolles
+  plymouthRock
+  brahma
+  cochin
+  orpington
+  wyandotte
+  marans
+  sussexTricolor
+  australorp
+  padoue
+  houdan
+  sabelpoot
+  serama
+  nagasaki
+  gournay
+  coucouDeRennes
+  gelineDeTouraine
+  gauloise
+  ardennaise
+  pekin
+  sebright
+  chabo
+  barbuDUccle
+  bantamDeHollande
+  autre // Option si la race n'est pas connue ou spécifiée
 }
