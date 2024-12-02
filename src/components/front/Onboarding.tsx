@@ -1,9 +1,7 @@
 import Image from "next/image";
-import {
-  LoginLink,
-  RegisterLink,
-} from "@kinde-oss/kinde-auth-nextjs/components";
+import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 export default function OnBoarding() {
   return (
@@ -13,7 +11,7 @@ export default function OnBoarding() {
           <div className="flex flex-col items-center space-y-4 text-center">
             <div>
               <Image
-                src="cocopilot-logo.svg"
+                src="/cocopilot-logo.svg"
                 alt="cocopilot logo"
                 width={110}
                 height={110}
@@ -38,7 +36,7 @@ export default function OnBoarding() {
               </Button>
 
               <Button asChild>
-                <LoginLink>Déja un compte ?</LoginLink>
+                <Link href="/dashboard">Déja un compte ?</Link>
               </Button>
             </div>
           </div>

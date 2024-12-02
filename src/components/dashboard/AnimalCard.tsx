@@ -1,25 +1,20 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  CalendarIcon,
-  ScaleIcon,
-  HeartPulseIcon,
-  TagIcon,
-  ClipboardIcon,
-} from "lucide-react";
 
 import type { Animal } from "@prisma/client";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import Image from "next/image";
 
 type AnimalCardProps = {
   animalData: Animal;
 };
 
 export function AnimalCard({ animalData }: AnimalCardProps) {
+  console.log(animalData);
   return (
     <Card className="mx-auto w-full max-w-md overflow-hidden">
       <div className="relative h-48">
-        <img
+        <Image
           src="/poules/rousse.webp"
           alt="Profile cover"
           className="h-full w-full object-cover"

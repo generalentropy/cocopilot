@@ -25,18 +25,16 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs";
+import {
+  LogoutLink,
+  useKindeBrowserClient,
+} from "@kinde-oss/kinde-auth-nextjs";
 
-export function NavUser({
-  user,
-}: {
-  user: {
-    name: string;
-    email: string;
-    avatar: string;
-  };
-}) {
+export function NavUser() {
   const { isMobile } = useSidebar();
+
+  const { getUser } = useKindeBrowserClient();
+  const user = getUser();
 
   return (
     <SidebarMenu>
@@ -47,13 +45,19 @@ export function NavUser({
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+              <Avatar className="h-8 w-8 rounded-full bg-gray-200">
+                <AvatarImage
+                  referrerPolicy="no-referrer"
+                  src={user?.picture ?? "/default-avatar.png"}
+                  alt={user?.given_name || undefined}
+                />
+                <AvatarFallback className="rounded-lg" delayMs={800}>
+                  CN
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{`Eddy Nicolle`}</span>
-                <span className="truncate text-xs">{`eddy.nicolle@tuta.io`}</span>
+                <span className="truncate font-semibold">{`${user?.given_name ?? ""} ${user?.family_name ?? ""}`}</span>
+                <span className="truncate text-xs">{`${user?.email ?? ""}`}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -66,20 +70,26 @@ export function NavUser({
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                <Avatar className="h-8 w-8 rounded-full">
+                  <AvatarImage
+                    referrerPolicy="no-referrer"
+                    src={user?.picture ?? "/default-avatar.png"}
+                    alt={user?.given_name || "Avatar de l'utilisateur"}
+                  />
+                  <AvatarFallback className="rounded-full"></AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">{user.name}</span>
-                  <span className="truncate text-xs">{user.email}</span>
+                  <span className="truncate font-semibold">
+                    {user?.given_name}
+                  </span>
+                  <span className="truncate text-xs">{`${user?.email ?? ""}`}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <Sparkles />
+                <Sparkles className="text-amber-500" />
                 Passer à cocopilot+
               </DropdownMenuItem>
             </DropdownMenuGroup>

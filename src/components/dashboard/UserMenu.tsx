@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { getInitials } from "@/lib/helpers";
+import { getInitials } from "@/app/utils/helpers";
 
 export default async function UserMenu() {
   const { getUser } = getKindeServerSession();
@@ -22,7 +22,7 @@ export default async function UserMenu() {
       <DropdownMenuTrigger className="focus:outline-none focus-visible:ring-transparent">
         <Avatar>
           <AvatarImage
-            src={user.picture ?? "default-avatar.png"}
+            src={user.picture ?? "/default-avatar.png"}
             referrerPolicy="no-referrer"
           />
           <AvatarFallback delayMs={1000}>
