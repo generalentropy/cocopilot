@@ -18,7 +18,6 @@ import { menuData } from "@/lib/menu";
 import Link from "next/link";
 import { capitalizeFirstLetter } from "@/app/utils/helpers";
 import { usePathname } from "next/navigation";
-// import AppTitle from "./AppTitle";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
