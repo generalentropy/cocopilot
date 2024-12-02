@@ -1,3 +1,5 @@
+"use client";
+
 import {
   AudioWaveform,
   BookOpen,
@@ -11,15 +13,20 @@ import {
   SquareTerminal,
 } from "lucide-react";
 
-export const dashboardMenu = [
-  { id: 0, name: "accueil", href: "/dashboard" },
-  { id: 1, name: "animaux", href: "/animals" },
-  { id: 2, name: "production", href: "/production" },
-  { id: 3, name: "soins", href: "/care" },
-  { id: 3, name: "santé", href: "/dashboard/health" },
-];
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarRail,
+} from "@/components/ui/sidebar";
+import { TeamSwitcher } from "./team-swicther";
+import { NavMain } from "./nav-main";
+import { NavProjects } from "./nav-projects";
+import { NavUser } from "./nav-user";
 
-export const sampleData = {
+// This is sample data.
+const data = {
   user: {
     name: "shadcn",
     email: "m@example.com",
@@ -147,3 +154,21 @@ export const sampleData = {
     },
   ],
 };
+
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  return (
+    <Sidebar collapsible="icon" {...props}>
+      <SidebarHeader>
+        <TeamSwitcher teams={data.teams} />
+      </SidebarHeader>
+      <SidebarContent>
+        <NavMain items={data.navMain} />
+        <NavProjects projects={data.projects} />
+      </SidebarContent>
+      <SidebarFooter>
+        <NavUser user={data.user} />
+      </SidebarFooter>
+      <SidebarRail />
+    </Sidebar>
+  );
+}
