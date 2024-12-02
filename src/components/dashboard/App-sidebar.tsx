@@ -40,14 +40,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 {item.items.map((item) => (
                   <SidebarMenuItem
                     key={item.title}
-                    className="py-2 text-gray-600"
+                    className="pb-1 text-gray-600"
                   >
                     <SidebarMenuButton
                       asChild
                       isActive={pathname === item?.url}
                       className="no-select text-base"
                     >
-                      <Link href={item.url}>
+                      <Link href={item.url} className="py-6">
                         <item.icon style={{ width: "24px", height: "auto" }} />
                         {capitalizeFirstLetter(item.title)}
                       </Link>
