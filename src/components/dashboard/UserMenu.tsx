@@ -25,7 +25,7 @@ export default async function UserMenu() {
             src={user.picture ?? "default-avatar.png"}
             referrerPolicy="no-referrer"
           />
-          <AvatarFallback>
+          <AvatarFallback delayMs={1000}>
             {getInitials(user?.given_name, user.family_name, user?.email)}
           </AvatarFallback>
         </Avatar>
