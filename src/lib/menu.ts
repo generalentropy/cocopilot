@@ -44,7 +44,7 @@ export const sampleData = {
   ],
   navMain: [
     {
-      title: "Playground",
+      title: "Aperçu",
       url: "#",
       icon: SquareTerminal,
       isActive: true,
