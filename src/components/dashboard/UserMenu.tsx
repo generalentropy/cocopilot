@@ -16,11 +16,15 @@ import { getInitials } from "@/lib/helpers";
 export default async function UserMenu() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
+
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger className="focus:outline-none focus-visible:ring-transparent">
         <Avatar>
-          <AvatarImage src={user?.picture ?? "default-avatar.png"} />
+          <AvatarImage
+            src={user.picture ?? "default-avatar.png"}
+            referrerPolicy="no-referrer"
+          />
           <AvatarFallback>
             {getInitials(user?.given_name, user.family_name, user?.email)}
           </AvatarFallback>
