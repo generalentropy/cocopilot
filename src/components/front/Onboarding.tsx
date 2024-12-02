@@ -29,7 +29,7 @@ export default function OnBoarding() {
             </div>
             <div className="space-x-4">
               <Button
-                className="bg-amber-500 transition-colors hover:bg-amber-600"
+                className="bg-emerald-500 transition-colors hover:bg-emerald-600"
                 asChild
               >
                 <RegisterLink>Commencer</RegisterLink>

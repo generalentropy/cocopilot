@@ -29,6 +29,7 @@ import {
   LogoutLink,
   useKindeBrowserClient,
 } from "@kinde-oss/kinde-auth-nextjs";
+import { getInitials } from "@/app/utils/helpers";
 
 export function NavUser() {
   const { isMobile } = useSidebar();
@@ -51,8 +52,15 @@ export function NavUser() {
                   src={user?.picture ?? "/default-avatar.png"}
                   alt={user?.given_name || undefined}
                 />
-                <AvatarFallback className="rounded-lg" delayMs={800}>
-                  CN
+                <AvatarFallback
+                  className="rounded-full bg-gray-400 text-white"
+                  delayMs={800}
+                >
+                  {getInitials(
+                    user?.given_name,
+                    user?.family_name,
+                    user?.email,
+                  )}
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
@@ -76,7 +84,16 @@ export function NavUser() {
                     src={user?.picture ?? "/default-avatar.png"}
                     alt={user?.given_name || "Avatar de l'utilisateur"}
                   />
-                  <AvatarFallback className="rounded-full"></AvatarFallback>
+                  <AvatarFallback
+                    className="rounded-full bg-gray-400 text-white"
+                    delayMs={800}
+                  >
+                    {getInitials(
+                      user?.given_name,
+                      user?.family_name,
+                      user?.email,
+                    )}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">

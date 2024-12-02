@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/sidebar";
 import { ReactNode } from "react";
 
-export default async function DashboardLoayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: ReactNode;

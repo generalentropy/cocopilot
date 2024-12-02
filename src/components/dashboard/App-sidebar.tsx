@@ -18,29 +18,37 @@ import { menuData } from "@/lib/menu";
 import Link from "next/link";
 import { capitalizeFirstLetter } from "@/app/utils/helpers";
 import { usePathname } from "next/navigation";
+import DashboardLogo from "./DashboardLogo";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
 
   return (
     <Sidebar {...props}>
-      <SidebarHeader>{/* <AppTitle /> */}</SidebarHeader>
+      <SidebarHeader>
+        <DashboardLogo />
+      </SidebarHeader>
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
         {menuData.navMain.map((item) => (
           <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+            <SidebarGroupLabel className="text-md">
+              {item.title}
+            </SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {item.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
+                  <SidebarMenuItem
+                    key={item.title}
+                    className="py-2 text-gray-600"
+                  >
                     <SidebarMenuButton
                       asChild
                       isActive={pathname === item?.url}
-                      className="no-select"
+                      className="no-select text-base"
                     >
                       <Link href={item.url}>
-                        <item.icon />
+                        <item.icon style={{ width: "24px", height: "auto" }} />
                         {capitalizeFirstLetter(item.title)}
                       </Link>
                     </SidebarMenuButton>

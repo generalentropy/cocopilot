@@ -21,7 +21,7 @@ export const menuData = {
 
       items: [
         {
-          title: "Vue d'ensemble",
+          title: "vue d'ensemble",
           url: "/dashboard",
           icon: LayoutDashboard,
         },
