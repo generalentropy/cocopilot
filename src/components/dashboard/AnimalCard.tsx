@@ -34,8 +34,6 @@ type AnimalCardProps = {
 };
 
 export function AnimalCard({ animalData }: AnimalCardProps) {
-  console.log(animalData);
-
   const statusColors: { [key: string]: string } = {
     healthy: "bg-green-200 border border-green-300 text-green-600",
     injured: "bg-red-200 border border-red-300 text-red-600",
@@ -49,7 +47,7 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
     "bg-gray-200 border border-gray-300 text-gray-600";
 
   return (
-    <Card className="w-[300px] overflow-hidden">
+    <Card className="w-full overflow-hidden sm:w-[300px]">
       <CardHeader className="flex-col items-center justify-between border-b bg-gray-50">
         <div className="flex min-w-full justify-between">
           <div className="flex">
