@@ -14,6 +14,7 @@ async function main() {
         dateOfBirth: new Date("2023-11-01"),
         userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",
         note: "Cluck est l'une des poules les plus actives de la ferme.",
+        imgUrl: "https://i.imgur.com/VfaazJE.jpeg",
       },
       {
         name: "Feather",
@@ -25,6 +26,7 @@ async function main() {
         dateOfBirth: new Date("2023-01-15"),
         userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",
         note: "Malgré sa récupération, Feather reste un peu hésitante à marcher sur un terrain accidenté.",
+        imgUrl: "https://i.imgur.com/lWJZSMl.jpeg",
       },
       {
         name: "Goldie",
@@ -35,7 +37,8 @@ async function main() {
         healthNotes: "Aile droite légèrement abîmée.",
         dateOfBirth: new Date("2022-06-10"),
         userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",
-        note: "Goldie est connue pour sa nature douce et son plumage doré éclatant.",
+        note: null,
+        imgUrl: "https://i.imgur.com/WqSztSB.jpeg",
       },
       {
         name: "Speckle",
@@ -47,6 +50,7 @@ async function main() {
         dateOfBirth: new Date("2022-08-21"),
         userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",
         note: "Doit être surveillée de près, surtout par temps humide.",
+        imgUrl: "https://i.imgur.com/1bB5qpr.jpeg",
       },
       {
         name: "Peck",
@@ -101,7 +105,7 @@ async function main() {
         healthNotes: "Après une fracture mineure.",
         dateOfBirth: new Date("2023-06-22"),
         userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",
-        note: "Petite mais pleine de vie, Fluffy est un favori des enfants.",
+        note: null,
       },
       {
         name: "Shadow",

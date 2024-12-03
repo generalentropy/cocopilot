@@ -5,13 +5,21 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 import { type Animal } from "@prisma/client";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Heart, Calendar1, Weight, NotepadText } from "lucide-react";
+import { Heart, Calendar1, Weight, NotepadText, Eye } from "lucide-react";
 
 import CustomBadge from "./CustomBadge";
-import { getHealthStatusColor, healthStatus } from "@/lib/card";
-import { ScrollArea } from "../ui/scroll-area";
+import { healthStatus } from "@/lib/card";
+import { Separator } from "../ui/separator";
+import { splitUUID } from "@/app/utils/helpers";
 
 type AnimalCardProps = {
   animalData: Animal;
@@ -19,29 +27,67 @@ type AnimalCardProps = {
 
 export function AnimalCard({ animalData }: AnimalCardProps) {
   console.log(animalData);
+
+  const statusColors: { [key: string]: string } = {
+    healthy: "bg-green-200 border border-green-300 text-green-600",
+    injured: "bg-red-200 border border-red-300 text-red-600",
+    sick: "bg-orange-200 border border-orange-300 text-orange-600",
+    recovering: "bg-blue-200 border border-blue-300 text-blue-600",
+    unknown: "bg-gray-200 border border-gray-300 text-gray-600",
+  };
+
+  const colorClass =
+    statusColors[animalData.healthStatus ?? ""] ||
+    "bg-gray-200 border border-gray-300 text-gray-600";
+
   return (
-    <Card className="h-[430px] w-[300px] overflow-hidden shadow-none">
-      <CardHeader className="flex-row items-center justify-between border-b bg-gray-50">
-        <span className="text-2xl font-light">{animalData.name}</span>
-        <Avatar className="h-16 w-16 ring-4 ring-gray-200">
-          <AvatarImage src="/poules/rousse.webp" />
-          <AvatarFallback></AvatarFallback>
-        </Avatar>
+    <Card className="w-[300px] overflow-hidden">
+      <CardHeader className="flex-col items-center justify-between border-b bg-gray-50">
+        <div className="flex min-w-full justify-between">
+          <div className="flex">
+            <div className="flex flex-col items-start">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger className="max-w-[160px] truncate font-sans text-xl tracking-wider">
+                    {animalData.name?.toLocaleUpperCase()}
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Nom : {animalData.name}</p>
+                    <p>Identifiant : {splitUUID(animalData.id)}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+
+              <CustomBadge className="mt-1 rounded-full border border-gray-300 bg-white font-medium text-gray-600">
+                Race : {animalData.race}
+              </CustomBadge>
+              {/* <div className="mt-2 text-xs italic text-muted-foreground">
+                Identifiant : {splitUUID(animalData.id)}
+              </div> */}
+            </div>
+          </div>
+          <Avatar className="h-16 w-16 ring-4 ring-gray-200">
+            <AvatarImage
+              className="object-cover"
+              src={animalData.imgUrl ?? "/poules/rousse.webp"}
+            />
+            <AvatarFallback></AvatarFallback>
+          </Avatar>
+        </div>
       </CardHeader>
-      <CardContent className="flex-row">
-        <div className="mt-3 flex justify-between">
+      <CardContent className="p-6">
+        <div className="flex justify-between">
           <div className="flex items-center">
             <Heart className="mr-2" size={18} />
             <span>Santé</span>
           </div>
-          <CustomBadge
-            className={getHealthStatusColor(animalData.healthStatus)}
-          >
+          <CustomBadge className={colorClass}>
             {healthStatus(animalData.healthStatus)}
           </CustomBadge>
         </div>
+        <Separator className="my-4" />
 
-        <div className="mt-3 flex justify-between">
+        <div className="flex justify-between">
           <div className="flex items-center">
             <Calendar1 className="mr-2" size={18} />
             <span>Âge</span>
@@ -50,22 +96,33 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
             {animalData.age} mois
           </CustomBadge>
         </div>
+        <Separator className="my-4" />
 
-        <div className="mt-3 flex justify-between">
+        <div className="flex justify-between">
           <div className="flex items-center">
             <Weight className="mr-2" size={18} />
             <span>Poids</span>
           </div>
-          <CustomBadge>{animalData.weight}g</CustomBadge>
+          <CustomBadge className="bg-gray-500">
+            {animalData.weight}g
+          </CustomBadge>
         </div>
       </CardContent>
-      <CardFooter className="flex flex-col justify-start px-2 pb-2">
-        <CustomBadge className="mb-2 flex w-full bg-gray-200 py-2 text-gray-600">
-          <NotepadText size={16} className="mr-1" /> Notes
+      <CardFooter className="flex flex-col justify-start">
+        <CustomBadge className="flex w-full justify-between bg-gray-100 py-2 text-gray-700">
+          <p className="flex">
+            <NotepadText size={16} className="mr-1" /> Note
+          </p>
+
+          {animalData.note ? (
+            <p className="group flex cursor-pointer items-center transition-colors hover:text-gray-900 hover:underline">
+              <Eye size={14} className="mr-1" />
+              Lire la note
+            </p>
+          ) : (
+            <p className="flex italic">Pas de note</p>
+          )}
         </CustomBadge>
-        <ScrollArea className="m-0 h-[121px] border px-2 text-sm italic">
-          <p>{animalData.note}</p>
-        </ScrollArea>
       </CardFooter>
     </Card>
   );

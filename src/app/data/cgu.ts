@@ -42,7 +42,7 @@ export const termsText = {
       title: "5. Utilisation des Services",
       content: `En utilisant Cocopilot, vous vous engagez à :
           - Ne pas utiliser nos services à des fins illégales, frauduleuses ou nuisibles.
-          - Fournir des informations exactes concernant vos animaux et leur environnement.
+          - Prendre en compte que les données peuvent être erronées. En aucun cas, nous ne vous recommandons de prendre une décision importante uniquement sur la base des informations affichées dans l'application.
           - Ne pas perturber ou tenter de perturber le fonctionnement de l’application.
         `,
     },

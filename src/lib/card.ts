@@ -1,11 +1,11 @@
-export function getHealthStatusColor(status: string) {
+export function getHealthStatusColor(status: string | null) {
   switch (status) {
     case "healthy":
-      return "bg-green-500";
+      return "bg-green-200 border-green-200 text-green-700";
     case "injured":
       return "bg-red-500";
     case "sick":
-      return "bg-yellow-500";
+      return "bg-orange-500";
     case "recovering":
       return "bg-blue-500";
     case "unknown":
@@ -15,10 +15,10 @@ export function getHealthStatusColor(status: string) {
   }
 }
 
-export function healthStatus(status: string) {
+export function healthStatus(status: string | null) {
   switch (status) {
     case "healthy":
-      return "Bonne";
+      return "Ok";
     case "injured":
       return "Blessée";
     case "sick":

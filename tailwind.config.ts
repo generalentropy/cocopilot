@@ -10,8 +10,11 @@ const config: Config = {
   ],
   safelist: [
     "bg-green-500",
+    "bg-green-200",
+    "border-green-200",
+    "text-green-700",
     "bg-red-500",
-    "bg-yellow-500",
+    "bg-orange-500",
     "bg-blue-500",
     "bg-gray-500",
   ],
