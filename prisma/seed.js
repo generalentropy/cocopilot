@@ -13,6 +13,7 @@ async function main() {
         healthNotes: null,
         dateOfBirth: new Date("2023-11-01"),
         userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",
+        note: "Cluck est l'une des poules les plus actives de la ferme.",
       },
       {
         name: "Feather",
@@ -23,6 +24,7 @@ async function main() {
         healthNotes: "S'est remise d'une blessure à la patte.",
         dateOfBirth: new Date("2023-01-15"),
         userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",
+        note: "Malgré sa récupération, Feather reste un peu hésitante à marcher sur un terrain accidenté.",
       },
       {
         name: "Goldie",
@@ -33,6 +35,7 @@ async function main() {
         healthNotes: "Aile droite légèrement abîmée.",
         dateOfBirth: new Date("2022-06-10"),
         userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",
+        note: "Goldie est connue pour sa nature douce et son plumage doré éclatant.",
       },
       {
         name: "Speckle",
@@ -43,6 +46,7 @@ async function main() {
         healthNotes: "Problème respiratoire observé.",
         dateOfBirth: new Date("2022-08-21"),
         userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",
+        note: "Doit être surveillée de près, surtout par temps humide.",
       },
       {
         name: "Peck",
@@ -53,6 +57,7 @@ async function main() {
         healthNotes: null,
         dateOfBirth: new Date("2022-04-10"),
         userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",
+        note: "Poule robuste et très curieuse, elle est souvent la première à explorer les nouveaux environnements.",
       },
       {
         name: "Snow",
@@ -63,6 +68,7 @@ async function main() {
         healthNotes: "Statut de santé non confirmé.",
         dateOfBirth: new Date("2022-11-30"),
         userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",
+        note: "Snow a un comportement calme et se distingue par ses plumes blanches immaculées.",
       },
       {
         name: "Sunny",
@@ -73,6 +79,7 @@ async function main() {
         healthNotes: null,
         dateOfBirth: new Date("2023-02-10"),
         userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",
+        note: "Son plumage jaune brillant fait honneur à son nom.",
       },
       {
         name: "Mellow",
@@ -83,6 +90,7 @@ async function main() {
         healthNotes: "Problème intestinal détecté.",
         dateOfBirth: new Date("2023-05-18"),
         userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",
+        note: "Son appétit a diminué ces derniers jours, un suivi est nécessaire.",
       },
       {
         name: "Fluffy",
@@ -93,6 +101,7 @@ async function main() {
         healthNotes: "Après une fracture mineure.",
         dateOfBirth: new Date("2023-06-22"),
         userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",
+        note: "Petite mais pleine de vie, Fluffy est un favori des enfants.",
       },
       {
         name: "Shadow",
@@ -103,6 +112,7 @@ async function main() {
         healthNotes: null,
         dateOfBirth: new Date("2023-03-14"),
         userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",
+        note: "Shadow est discrète mais très observatrice, toujours alerte.",
       },
     ],
   });

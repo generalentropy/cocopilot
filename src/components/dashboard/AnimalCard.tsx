@@ -1,10 +1,17 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 
-import type { Animal } from "@prisma/client";
+import { type Animal } from "@prisma/client";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Heart, Cake } from "lucide-react";
-import clsx from "clsx";
+import { Heart, Calendar1, Weight, NotepadText } from "lucide-react";
+
 import CustomBadge from "./CustomBadge";
+import { getHealthStatusColor, healthStatus } from "@/lib/card";
+import { ScrollArea } from "../ui/scroll-area";
 
 type AnimalCardProps = {
   animalData: Animal;
@@ -13,10 +20,10 @@ type AnimalCardProps = {
 export function AnimalCard({ animalData }: AnimalCardProps) {
   console.log(animalData);
   return (
-    <Card className="h-[400px] w-[300px] overflow-hidden shadow-none">
-      <CardHeader className="flex-row items-center justify-between bg-gray-200">
+    <Card className="h-[430px] w-[300px] overflow-hidden shadow-none">
+      <CardHeader className="flex-row items-center justify-between border-b bg-gray-50">
         <span className="text-2xl font-light">{animalData.name}</span>
-        <Avatar className="h-16 w-16">
+        <Avatar className="h-16 w-16 ring-4 ring-gray-200">
           <AvatarImage src="/poules/rousse.webp" />
           <AvatarFallback></AvatarFallback>
         </Avatar>
@@ -28,69 +35,38 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
             <span>Santé</span>
           </div>
           <CustomBadge
-            className={clsx({
-              "bg-green-500": animalData.healthStatus === "healthy",
-            })}
+            className={getHealthStatusColor(animalData.healthStatus)}
           >
-            {animalData.healthStatus}
+            {healthStatus(animalData.healthStatus)}
           </CustomBadge>
         </div>
 
         <div className="mt-3 flex justify-between">
           <div className="flex items-center">
-            <Cake className="mb-1 mr-2" size={19} />
+            <Calendar1 className="mr-2" size={18} />
             <span>Âge</span>
           </div>
           <CustomBadge className="bg-gray-500">
             {animalData.age} mois
           </CustomBadge>
         </div>
+
+        <div className="mt-3 flex justify-between">
+          <div className="flex items-center">
+            <Weight className="mr-2" size={18} />
+            <span>Poids</span>
+          </div>
+          <CustomBadge>{animalData.weight}g</CustomBadge>
+        </div>
       </CardContent>
+      <CardFooter className="flex flex-col justify-start px-2 pb-2">
+        <CustomBadge className="mb-2 flex w-full bg-gray-200 py-2 text-gray-600">
+          <NotepadText size={16} className="mr-1" /> Notes
+        </CustomBadge>
+        <ScrollArea className="m-0 h-[121px] border px-2 text-sm italic">
+          <p>{animalData.note}</p>
+        </ScrollArea>
+      </CardFooter>
     </Card>
   );
-
-  // return (
-  //   <Card className="w-[300px]">
-  //     <CardHeader>
-  //       <CardTitle className="text-center capitalize">poupoule</CardTitle>
-  //       <Badge className="mx-auto mt-2 rounded-full bg-gray-200 text-gray-500">
-  //         Orpington
-  //       </Badge>
-  //     </CardHeader>
-  //     <CardContent className="grid gap-4">
-  //       <div className="flex items-center">
-  //         <TagIcon className="mr-2 h-4 w-4 opacity-70" />
-  //         <span className="text-sm font-medium">Nom :</span>
-  //         <span className="ml-2 text-sm">Poupoule</span>
-  //       </div>
-  //       <div className="flex items-center">
-  //         <CalendarIcon className="mr-2 h-4 w-4 opacity-70" />
-  //         <span className="text-sm font-medium">Âge:</span>
-  //         <span className="ml-2 text-sm">18 mois</span>
-  //       </div>
-  //       <div className="flex items-center">
-  //         <CalendarIcon className="mr-2 h-4 w-4 opacity-70" />
-  //         <span className="text-sm font-medium">Date de naissance:</span>
-  //         <span className="ml-2 text-sm">31/10/2024</span>
-  //       </div>
-  //       <div className="flex items-center">
-  //         <ScaleIcon className="mr-2 h-4 w-4 opacity-70" />
-  //         <span className="text-sm font-medium">Poids:</span>
-  //         <span className="ml-2 text-sm">2000g</span>
-  //       </div>
-  //       <div className="flex items-center">
-  //         <HeartPulseIcon className="mr-2 h-4 w-4 text-pink-600 opacity-70" />
-  //         <span className="text-sm font-medium">État de santé:</span>
-  //         <Badge className="hover ml-2 bg-green-600">Bon</Badge>
-  //       </div>
-  //       <div className="mt-2">
-  //         <div className="mb-1 flex items-center">
-  //           <ClipboardIcon className="mr-2 h-4 w-4 opacity-70" />
-  //           <span className="text-sm font-medium">Notes de santé:</span>
-  //         </div>
-  //         <p className="text-sm text-muted-foreground">Poux à surveiller</p>
-  //       </div>
-  //     </CardContent>
-  //   </Card>
-  // );
 }

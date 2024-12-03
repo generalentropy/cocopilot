@@ -19,7 +19,7 @@ export default async function Animals() {
   console.log(user);
 
   return (
-    <div className="flex flex-wrap gap-4 p-4">
+    <div className="flex flex-wrap justify-center gap-4 px-2 py-2">
       {user?.ownedAnimals.map((animal) => (
         <AnimalCard key={animal.id} animalData={animal} />
       ))}
