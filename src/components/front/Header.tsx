@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="flex h-14 items-center px-4 lg:px-6">
+    <header className="flex h-14 items-center border-b px-4 lg:px-6">
       <Link className="flex items-center justify-center" href="/">
         <Image
           src="cocopilot-logo.svg"

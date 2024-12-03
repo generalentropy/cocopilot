@@ -1,10 +1,10 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 
 import type { Animal } from "@prisma/client";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Heart } from "lucide-react";
-import { splitUUID } from "@/app/utils/helpers";
+import { Heart, Cake } from "lucide-react";
+import clsx from "clsx";
+import CustomBadge from "./CustomBadge";
 
 type AnimalCardProps = {
   animalData: Animal;
@@ -13,18 +13,37 @@ type AnimalCardProps = {
 export function AnimalCard({ animalData }: AnimalCardProps) {
   console.log(animalData);
   return (
-    <Card className="w-[300px] overflow-hidden shadow-none">
-      <CardHeader className="flex-row items-center justify-between">
-        <span className="text-xl font-bold">{animalData.name}</span>
+    <Card className="h-[400px] w-[300px] overflow-hidden shadow-none">
+      <CardHeader className="flex-row items-center justify-between bg-gray-200">
+        <span className="text-2xl font-light">{animalData.name}</span>
         <Avatar className="h-16 w-16">
           <AvatarImage src="/poules/rousse.webp" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarFallback></AvatarFallback>
         </Avatar>
       </CardHeader>
       <CardContent className="flex-row">
-        <div className="flex flex-col items-center">
-          <Heart />
-          <span>Santé</span>
+        <div className="mt-3 flex justify-between">
+          <div className="flex items-center">
+            <Heart className="mr-2" size={18} />
+            <span>Santé</span>
+          </div>
+          <CustomBadge
+            className={clsx({
+              "bg-green-500": animalData.healthStatus === "healthy",
+            })}
+          >
+            {animalData.healthStatus}
+          </CustomBadge>
+        </div>
+
+        <div className="mt-3 flex justify-between">
+          <div className="flex items-center">
+            <Cake className="mb-1 mr-2" size={19} />
+            <span>Âge</span>
+          </div>
+          <CustomBadge className="bg-gray-500">
+            {animalData.age} mois
+          </CustomBadge>
         </div>
       </CardContent>
     </Card>
