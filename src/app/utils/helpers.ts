@@ -29,3 +29,12 @@ export function capitalizeFirstLetter(str: string): string {
   if (!str) return str;
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+export function splitUUID(uuid: string) {
+  if (typeof uuid !== "string") {
+    return uuid;
+  }
+
+  const groups = uuid.split("-");
+  return groups[0];
+}

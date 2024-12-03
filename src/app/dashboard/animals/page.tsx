@@ -1,4 +1,5 @@
 import prisma from "@/app/lib/db";
+import { AnimalCard } from "@/components/dashboard/AnimalCard";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 async function getData() {
@@ -18,8 +19,10 @@ export default async function Animals() {
   console.log(user);
 
   return (
-    <div>
-      {user?.ownedAnimals.map((animal) => <p key={animal.id}>{animal.name}</p>)}
+    <div className="flex flex-wrap gap-4 p-4">
+      {user?.ownedAnimals.map((animal) => (
+        <AnimalCard key={animal.id} animalData={animal} />
+      ))}
     </div>
   );
 }

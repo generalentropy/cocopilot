@@ -2,8 +2,9 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 import type { Animal } from "@prisma/client";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Heart } from "lucide-react";
+import { splitUUID } from "@/app/utils/helpers";
 
 type AnimalCardProps = {
   animalData: Animal;
@@ -12,41 +13,18 @@ type AnimalCardProps = {
 export function AnimalCard({ animalData }: AnimalCardProps) {
   console.log(animalData);
   return (
-    <Card className="mx-auto w-full max-w-md overflow-hidden">
-      <div className="relative h-48">
-        <Image
-          src="/poules/rousse.webp"
-          alt="Profile cover"
-          className="h-full w-full object-cover"
-        />
-        <Avatar className="absolute bottom-0 left-1/2 h-24 w-24 -translate-x-1/2 translate-y-1/2 transform border-4 border-background">
-          <AvatarImage src="/poules/rousse.webp" alt="Profile picture" />
-          <AvatarFallback>JD</AvatarFallback>
+    <Card className="w-[300px] overflow-hidden shadow-none">
+      <CardHeader className="flex-row items-center justify-between">
+        <span className="text-xl font-bold">{animalData.name}</span>
+        <Avatar className="h-16 w-16">
+          <AvatarImage src="/poules/rousse.webp" />
+          <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-      </div>
-      <CardHeader className="pb-4 pt-16">
-        <h2 className="text-center text-2xl font-bold">Poupoule</h2>
       </CardHeader>
-      <CardContent className="grid gap-4">
-        <div className="flex items-center justify-between">
-          <span className="text-sm font-medium">Profession</span>
-          <Badge variant="secondary">Designer</Badge>
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="text-sm font-medium">Localisation</span>
-          <span className="text-sm">Paris, France</span>
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="text-sm font-medium">Expérience</span>
-          <span className="text-sm">5 ans</span>
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="text-sm font-medium">Spécialité</span>
-          <span className="text-sm">UI/UX Design</span>
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="text-sm font-medium">Langues</span>
-          <span className="text-sm">Français, Anglais</span>
+      <CardContent className="flex-row">
+        <div className="flex flex-col items-center">
+          <Heart />
+          <span>Santé</span>
         </div>
       </CardContent>
     </Card>
