@@ -12,6 +12,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
 import { type Animal } from "@prisma/client";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Heart, Calendar1, Weight, NotepadText, Eye } from "lucide-react";
@@ -48,7 +54,7 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
             <div className="flex flex-col items-start">
               <TooltipProvider>
                 <Tooltip>
-                  <TooltipTrigger className="max-w-[160px] truncate font-sans text-xl tracking-wider">
+                  <TooltipTrigger className="max-w-[160px] truncate text-xl font-medium tracking-wider">
                     {animalData.name?.toLocaleUpperCase()}
                   </TooltipTrigger>
                   <TooltipContent>
@@ -61,9 +67,6 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
               <CustomBadge className="mt-1 rounded-full border border-gray-300 bg-white font-medium text-gray-600">
                 Race : {animalData.race}
               </CustomBadge>
-              {/* <div className="mt-2 text-xs italic text-muted-foreground">
-                Identifiant : {splitUUID(animalData.id)}
-              </div> */}
             </div>
           </div>
           <Avatar className="h-16 w-16 ring-4 ring-gray-200">
@@ -115,10 +118,19 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
           </p>
 
           {animalData.note ? (
-            <p className="group flex cursor-pointer items-center transition-colors hover:text-gray-900 hover:underline">
-              <Eye size={14} className="mr-1" />
-              Lire la note
-            </p>
+            <Popover>
+              <PopoverTrigger>
+                <p className="group flex cursor-pointer items-center transition-colors hover:text-gray-900 hover:underline">
+                  <Eye size={14} className="mr-1" />
+                  Lire la note
+                </p>
+              </PopoverTrigger>
+              <PopoverContent align="center" className="w-[300px]">
+                <div className="whitespace-pre-line text-sm">
+                  {animalData.note}
+                </div>
+              </PopoverContent>
+            </Popover>
           ) : (
             <p className="flex italic">Pas de note</p>
           )}
