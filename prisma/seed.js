@@ -39,6 +39,7 @@ async function main() {
         userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",
         note: null,
         imgUrl: "https://i.imgur.com/WqSztSB.jpeg",
+        sex: "MALE",
       },
       {
         name: "Speckle",
@@ -51,6 +52,7 @@ async function main() {
         userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",
         note: "Doit être surveillée de près, surtout par temps humide.",
         imgUrl: "https://i.imgur.com/1bB5qpr.jpeg",
+        sex: "MALE",
       },
       {
         name: "Peck",

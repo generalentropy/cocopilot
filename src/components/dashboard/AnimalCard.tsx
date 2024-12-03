@@ -18,6 +18,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
+import { TbGenderFemale, TbGenderMale } from "react-icons/tb";
+
 import { type Animal } from "@prisma/client";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Heart, Calendar1, Weight, NotepadText, Eye } from "lucide-react";
@@ -64,9 +66,20 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
                 </Tooltip>
               </TooltipProvider>
 
-              <CustomBadge className="mt-1 rounded-full border border-gray-300 bg-white font-medium text-gray-600">
-                Race : {animalData.race}
-              </CustomBadge>
+              <div className="flex items-center">
+                <CustomBadge className="mt-1 rounded-full border border-gray-300 bg-white font-medium text-gray-600">
+                  Race : {animalData.race}
+                </CustomBadge>
+                {animalData.sex === "MALE" ? (
+                  <div className="ml-2 mt-1 text-blue-300">
+                    <TbGenderMale size={20} />
+                  </div>
+                ) : (
+                  <div className="ml-2 mt-1 text-pink-300">
+                    <TbGenderFemale size={20} />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           <Avatar className="h-16 w-16 ring-4 ring-gray-200">
