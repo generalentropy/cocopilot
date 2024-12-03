@@ -46,11 +46,11 @@ enum Sex {
 }
 
 enum HealthStatus {
-  healthy // En bonne santé
-  injured // Blessée
-  sick // Malade
-  recovering // En convalescence
-  unknown // Statut inconnu
+  healthy
+  injured
+  sick
+  recovering
+  unknown // status inconnu
 }
 
 enum ChickenBreed {
@@ -84,5 +84,5 @@ enum ChickenBreed {
   chabo
   barbuDUccle
   bantamDeHollande
-  autre // Option si la race n'est pas connue ou spécifiée
+  autre // Si la race n'est pas connue ou spécifiée
 }

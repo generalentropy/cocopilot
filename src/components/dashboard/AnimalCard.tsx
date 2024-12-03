@@ -27,7 +27,7 @@ import { Heart, Calendar1, Weight, NotepadText, Eye } from "lucide-react";
 import CustomBadge from "./CustomBadge";
 import { healthStatus } from "@/lib/card";
 import { Separator } from "../ui/separator";
-import { splitUUID } from "@/app/utils/helpers";
+import { capitalizeFirstLetter, splitUUID } from "@/app/utils/helpers";
 
 type AnimalCardProps = {
   animalData: Animal;
@@ -68,7 +68,9 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
 
               <div className="flex items-center">
                 <CustomBadge className="mt-1 rounded-full border border-gray-300 bg-white font-medium text-gray-600">
-                  Race : {animalData.race}
+                  {animalData.race === "autre"
+                    ? "Non spécifié"
+                    : capitalizeFirstLetter(animalData.race)}
                 </CustomBadge>
                 {animalData.sex === "MALE" ? (
                   <div className="ml-2 mt-1 text-blue-300">
