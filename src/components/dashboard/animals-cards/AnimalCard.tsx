@@ -21,12 +21,12 @@ import {
 import { TbGenderFemale, TbGenderMale } from "react-icons/tb";
 
 import { type Animal } from "@prisma/client";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { Heart, Calendar1, Weight, NotepadText, Eye } from "lucide-react";
 
-import CustomBadge from "./CustomBadge";
+import CustomBadge from "../CustomBadge";
 import { healthStatus } from "@/lib/card";
-import { Separator } from "../ui/separator";
+import { Separator } from "../../ui/separator";
 import { capitalizeFirstLetter, splitUUID } from "@/app/utils/helpers";
 
 type AnimalCardProps = {
@@ -70,7 +70,7 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
                     ? "Non spécifié"
                     : capitalizeFirstLetter(animalData.race)}
                 </CustomBadge>
-                {animalData.sex === "MALE" ? (
+                {animalData.sex === "male" ? (
                   <div className="ml-2 mt-1 text-blue-300">
                     <TbGenderMale size={20} />
                   </div>

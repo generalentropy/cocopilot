@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/components/dashboard/App-sidebar";
+import { AppSidebar } from "@/components/dashboard/sidebar/App-sidebar";
 import BreadcrumbNav from "@/components/dashboard/Breadcrumb-nav";
 import { TailwindIndicator } from "@/components/dashboard/TailwindIndicator";
 

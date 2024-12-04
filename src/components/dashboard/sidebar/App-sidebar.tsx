@@ -13,12 +13,12 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 
-import { NavUser } from "./nav-user";
+import { NavUser } from "../nav-user";
 import { menuData } from "@/lib/menu";
 import Link from "next/link";
 import { capitalizeFirstLetter } from "@/app/utils/helpers";
 import { usePathname } from "next/navigation";
-import DashboardLogo from "./DashboardLogo";
+import DashboardLogo from "../DashboardLogo";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();

@@ -1,5 +1,5 @@
 import prisma from "@/app/lib/db";
-import { AnimalCard } from "@/components/dashboard/AnimalCard";
+import { AnimalCard } from "@/components/dashboard/animals-cards/AnimalCard";
 import CreateCard from "@/components/dashboard/animals-cards/CreateCard";
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
@@ -10,7 +10,11 @@ async function getData() {
 
   const data = await prisma.user.findUnique({
     where: { id: user.id },
-    include: { ownedAnimals: true },
+    include: {
+      ownedAnimals: {
+        orderBy: { createdAt: "desc" },
+      },
+    },
   });
 
   return data;

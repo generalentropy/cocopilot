@@ -1,4 +1,4 @@
-import UserMenu from "./UserMenu";
+import UserMenu from "./sidebar/UserMenu";
 
 export default function DashboardHeader() {
   return (

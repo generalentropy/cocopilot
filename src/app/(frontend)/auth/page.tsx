@@ -1,6 +1,6 @@
 "use client";
 
-import LoginCard from "@/components/dashboard/LoginCard";
+import LoginCard from "@/components/front/LoginCard";
 
 export default function AuthRoute() {
   return (

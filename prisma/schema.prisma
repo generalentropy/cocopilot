@@ -26,6 +26,7 @@ model User {
 
 model Animal {
   id           String        @id @default(uuid())
+  createdAt    DateTime      @default(now())
   name         String?
   weight       Int? // en grammes
   race         ChickenBreed
@@ -37,12 +38,12 @@ model Animal {
   userId       String?
   note         String?
   imgUrl       String?
-  sex          Sex?          @default(FEMALE)
+  sex          Sex?          @default(female)
 }
 
 enum Sex {
-  MALE
-  FEMALE
+  male
+  female
 }
 
 enum HealthStatus {
