@@ -31,3 +31,23 @@ export function healthStatus(status: string | null) {
       return "bg-gray-500";
   }
 }
+
+export function calculateAgeInMonths(utcTimestamp: Date): number | string {
+  const dateFromTimestamp = new Date(utcTimestamp);
+
+  if (isNaN(dateFromTimestamp.getTime())) {
+    return "erreur";
+  }
+
+  const today = new Date();
+
+  // Calcul des années et des mois écoulés
+  const yearsElapsed = today.getFullYear() - dateFromTimestamp.getFullYear();
+  const monthsElapsed = today.getMonth() - dateFromTimestamp.getMonth();
+
+  // Nombre total de mois écoulés
+  const totalMonthsElapsed = yearsElapsed * 12 + monthsElapsed;
+
+  // Retourne 0 si le timestamp est dans le futur
+  return totalMonthsElapsed >= 0 ? totalMonthsElapsed : 0;
+}

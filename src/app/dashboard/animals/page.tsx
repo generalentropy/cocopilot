@@ -1,6 +1,5 @@
 import prisma from "@/app/lib/db";
 import { AnimalCard } from "@/components/dashboard/animals-cards/AnimalCard";
-import { AnimalCardEdit } from "@/components/dashboard/animals-cards/AnimalCardEdit";
 import CreateCard from "@/components/dashboard/animals-cards/CreateCard";
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";

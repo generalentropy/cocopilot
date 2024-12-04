@@ -29,11 +29,10 @@ model Animal {
   createdAt    DateTime      @default(now())
   name         String?
   weight       Int? // en grammes
-  race         ChickenBreed
-  age          Int // en mois
+  race         ChickenBreed  @default(unknown)
   healthStatus HealthStatus? // optionnel / nullable
   healthNotes  String?
-  dateOfBirth  DateTime?
+  birthDate    DateTime      @default(now())
   User         User?         @relation(fields: [userId], references: [id])
   userId       String?
   note         String?
@@ -85,5 +84,6 @@ enum ChickenBreed {
   chabo
   barbuDUccle
   bantamDeHollande
-  autre // Si la race n'est pas connue ou spécifiée
+  autre // race connue mais non présente
+  unknown // Inconnue par l'user
 }

@@ -6,7 +6,6 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-
 import { Heart, Calendar1, Weight, NotepadText } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -29,6 +28,19 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { z } from "zod";
+import { animalSchema } from "@/app/lib/zodSchemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
+import { format } from "date-fns";
+import { fr } from "date-fns/locale";
+import { cn } from "@/app/lib/utils";
+import { chickenBreed } from "@/app/lib/animals";
 
 type AnimalCardCreateProps = {
   setModalState: React.Dispatch<React.SetStateAction<boolean>>;
@@ -36,28 +48,36 @@ type AnimalCardCreateProps = {
 
 export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
   const statusColors: { [key: string]: string } = {
-    healthy: "bg-green-200 border border-green-300 text-green-600",
-    injured: "bg-red-200 border border-red-300 text-red-600",
-    sick: "bg-orange-200 border border-orange-300 text-orange-600",
-    recovering: "bg-blue-200 border border-blue-300 text-blue-600",
-    unknown: "bg-gray-200 border border-gray-300 text-gray-600",
+    healthy: "bg-green-200 border border-green-300 text-green-700",
+    injured: "bg-red-200 border border-red-300 text-red-700",
+    sick: "bg-orange-200 border border-orange-300 text-orange-700",
+    recovering: "bg-blue-200 border border-blue-300 text-blue-700",
+    unknown: "bg-gray-200 border border-gray-300 text-gray-700",
   };
 
-  const form = useForm({
+  const form = useForm<z.infer<typeof animalSchema>>({
+    resolver: zodResolver(animalSchema),
     defaultValues: {
       name: "",
-      race: "autre",
+      race: null,
       sex: "female",
       healthStatus: "unknown",
-      age: 0,
-      weight: 0,
+      birthDate: new Date(),
+      weight: 2000,
       note: "",
       imgUrl: "/poules/rousse.webp",
     },
   });
 
+  function onSubmit(values: z.infer<typeof animalSchema>) {
+    console.log(values);
+  }
+
   const currentHealthStatus = form.watch("healthStatus");
   const colorClass = statusColors[currentHealthStatus] || statusColors.unknown;
+
+  // const errors = form.formState.errors;
+  // console.log("Erreurs du formulaire :", errors);
 
   return (
     <Card className="w-full overflow-hidden rounded-md">
@@ -70,8 +90,8 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
       </CardHeader>
 
       <Form {...form}>
-        <form>
-          <CardContent className="space-y-4 p-6">
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <CardContent className="space-y-4 p-4 sm:p-6">
             {/* Nom */}
             <FormField
               control={form.control}
@@ -80,7 +100,11 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
                 <FormItem>
                   <FormLabel>Nom</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Nom de l'animal" />
+                    <Input
+                      {...field}
+                      className="placeholder:italic"
+                      placeholder="Identifiant ou nom de l'animal"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -95,11 +119,24 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
                 <FormItem>
                   <FormLabel>Race</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="Ex: Leghorn, Sussex, autre..."
-                    />
+                    <Select onValueChange={field.onChange}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Sélectionner la race" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {chickenBreed.map((breed, i) => (
+                          <SelectItem key={i} value={breed.value}>
+                            {breed.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </FormControl>
+                  <div className="px-2 text-xs italic text-gray-500">
+                    Choisissez <span className="font-semibold">autre</span> si
+                    la race de l&apos;animal n&apos;est pas présente dans la
+                    base
+                  </div>
                   <FormMessage />
                 </FormItem>
               )}
@@ -118,7 +155,7 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
                       defaultValue={field.value}
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder="Choisir le sexe" />
+                        <SelectValue placeholder="Sélectionner le sexe" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="male">Mâle</SelectItem>
@@ -135,7 +172,7 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <Heart className="mr-2" size={18} />
-                <span>Santé</span>
+                <span>État de santé</span>
               </div>
               <FormField
                 control={form.control}
@@ -151,9 +188,7 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
                           <SelectValue placeholder="État de santé" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="healthy">
-                            En bonne santé
-                          </SelectItem>
+                          <SelectItem value="healthy">Bon</SelectItem>
                           <SelectItem value="injured">Blessé</SelectItem>
                           <SelectItem value="sick">Malade</SelectItem>
                           <SelectItem value="recovering">
@@ -169,19 +204,48 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
             </div>
             <Separator className="my-4" />
 
-            {/* Âge */}
-            <div className="flex items-center justify-between">
+            {/* Date de naissance */}
+            <div className="flex flex-col items-start justify-between sm:flex-row sm:items-center sm:gap-4">
               <div className="flex items-center">
                 <Calendar1 className="mr-2" size={18} />
-                <span>Âge (mois)</span>
+                <div className="flex flex-col">
+                  <span>Date de naissance</span>
+                  <span className="text-xs italic text-gray-500">
+                    (Date réelle ou approximative)
+                  </span>
+                </div>
               </div>
               <FormField
                 control={form.control}
-                name="age"
+                name="birthDate"
                 render={({ field }) => (
-                  <FormItem className="max-w-[120px]">
+                  <FormItem className="max-w-[240px]">
                     <FormControl>
-                      <Input type="number" {...field} placeholder="0" />
+                      <Popover modal={true}>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="outline"
+                            className={cn(
+                              "w-full justify-start text-left font-normal",
+                              !field.value && "text-muted-foreground",
+                            )}
+                          >
+                            {field.value
+                              ? format(field.value, "PPP", { locale: fr })
+                              : "Sélectionnez une date"}
+                            <Calendar1 className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0">
+                          <Calendar
+                            locale={fr}
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -202,7 +266,13 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
                 render={({ field }) => (
                   <FormItem className="max-w-[120px]">
                     <FormControl>
-                      <Input type="number" {...field} placeholder="0" />
+                      <Input
+                        type="number"
+                        {...field}
+                        placeholder="2000"
+                        min={0}
+                        step={50}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

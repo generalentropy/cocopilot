@@ -15,3 +15,7 @@ For the LoginLink and RegisterLink components, it's best to import them from @ki
 ## Kinde x supabase
 
 [Kinde X supabase](https://kinde.com/blog/engineering/kinde-with-supabase/)
+
+## Popover + modal issue
+
+[Shadcn popover not working in Modal Dialog](https://github.com/shadcn-ui/ui/issues/1511)

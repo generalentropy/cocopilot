@@ -25,7 +25,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { Heart, Calendar1, Weight, NotepadText, Eye } from "lucide-react";
 
 import CustomBadge from "../CustomBadge";
-import { healthStatus } from "@/app/lib/card";
+import { calculateAgeInMonths, healthStatus } from "@/app/lib/card";
 import { Separator } from "../../ui/separator";
 import { capitalizeFirstLetter, splitUUID } from "@/app/utils/helpers";
 
@@ -45,6 +45,8 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
   const colorClass =
     statusColors[animalData.healthStatus ?? ""] ||
     "bg-gray-200 border border-gray-300 text-gray-600";
+
+  const ageInMonths = calculateAgeInMonths(animalData.birthDate);
 
   return (
     <Card className="w-full overflow-hidden sm:w-[300px]">
@@ -109,7 +111,7 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
             <span>Âge</span>
           </div>
           <CustomBadge className="bg-gray-500">
-            {animalData.age} mois
+            {ageInMonths === 0 ? "Moins d'un mois" : ageInMonths + " mois"}
           </CustomBadge>
         </div>
         <Separator className="my-4" />

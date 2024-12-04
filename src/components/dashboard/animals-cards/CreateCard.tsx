@@ -25,12 +25,17 @@ export default function CreateCard() {
           <div className="flex items-center justify-center rounded-full bg-amber-100 p-4">
             <BadgePlus size={42} className="text-amber-500" />
           </div>
-          <p className="mt-2 text-sm font-medium text-gray-600">
+          <p className="mt-2 text-base font-medium text-gray-600">
             Ajouter un animal
+          </p>
+
+          <p className="mt-2 max-w-[400px] p-2 text-xs font-normal italic text-gray-500">
+            Ajoutez facilement un nouvel animal à votre collection. Vous pourrez
+            modifier ses informations ou le retirer à tout moment.
           </p>
         </Card>
       </DialogTrigger>
-      <DialogContent className="my-2 max-h-screen w-[95%] overflow-y-scroll rounded-lg border-none bg-transparent p-0">
+      <DialogContent className="max-h-[98%] w-[95%] overflow-y-scroll rounded-lg border-none bg-transparent p-0">
         <DialogHeader className="sr-only">
           <DialogTitle>Ajouter un animal</DialogTitle>
           <DialogDescription>

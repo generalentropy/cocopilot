@@ -38,7 +38,7 @@ export function NavUser() {
   const user = getUser();
 
   return (
-    <SidebarMenu>
+    <SidebarMenu className="border-t pt-2">
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
