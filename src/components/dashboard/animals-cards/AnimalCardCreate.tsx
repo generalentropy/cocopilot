@@ -31,7 +31,6 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 
 type AnimalCardCreateProps = {
-  // onSubmit: (values: AnimalFormValues) => void;
   setModalState: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -48,7 +47,7 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
     defaultValues: {
       name: "",
       race: "autre",
-      sex: "male",
+      sex: "female",
       healthStatus: "unknown",
       age: 0,
       weight: 0,
@@ -57,15 +56,11 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
     },
   });
 
-  // const handleFormSubmit = (values: any) => {
-  //   onSubmit(values);
-  // };
-
-  const currentHealthStatus = form.getValues("healthStatus");
+  const currentHealthStatus = form.watch("healthStatus");
   const colorClass = statusColors[currentHealthStatus] || statusColors.unknown;
 
   return (
-    <Card className="w-full overflow-hidden">
+    <Card className="w-full overflow-hidden rounded-md">
       <CardHeader className="flex-col items-center justify-between border-b bg-gray-50">
         <div className="flex min-w-full items-center justify-between">
           <h2 className="text-xl font-bold tracking-tight">

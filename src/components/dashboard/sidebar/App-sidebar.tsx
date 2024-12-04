@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/sidebar";
 
 import { NavUser } from "../nav-user";
-import { menuData } from "@/lib/menu";
+import { menuData } from "@/app/lib/menu";
 import Link from "next/link";
 import { capitalizeFirstLetter } from "@/app/utils/helpers";
 import { usePathname } from "next/navigation";

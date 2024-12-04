@@ -25,7 +25,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { Heart, Calendar1, Weight, NotepadText, Eye } from "lucide-react";
 
 import CustomBadge from "../CustomBadge";
-import { healthStatus } from "@/lib/card";
+import { healthStatus } from "@/app/lib/card";
 import { Separator } from "../../ui/separator";
 import { capitalizeFirstLetter, splitUUID } from "@/app/utils/helpers";
 

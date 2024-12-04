@@ -10,7 +10,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import React from "react";
-import { menuData } from "@/lib/menu";
+import { menuData } from "@/app/lib/menu";
 
 const getTitleFromPath = (path: string) => {
   for (const group of menuData.navMain) {

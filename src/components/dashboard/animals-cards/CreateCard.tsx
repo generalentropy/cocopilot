@@ -30,7 +30,7 @@ export default function CreateCard() {
           </p>
         </Card>
       </DialogTrigger>
-      <DialogContent className="max-h-screen w-[95%] overflow-y-scroll rounded-lg border-none bg-transparent p-0 py-2">
+      <DialogContent className="my-2 max-h-screen w-[95%] overflow-y-scroll rounded-lg border-none bg-transparent p-0">
         <DialogHeader className="sr-only">
           <DialogTitle>Ajouter un animal</DialogTitle>
           <DialogDescription>
