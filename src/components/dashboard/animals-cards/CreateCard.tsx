@@ -1,3 +1,5 @@
+"use client";
+
 import { Card } from "@/components/ui/card";
 import { BadgePlus } from "lucide-react";
 import {
@@ -9,9 +11,14 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+import { AnimalCardCreate } from "./AnimalCardCreate";
+import { useState } from "react";
+
 export default function CreateCard() {
+  const [open, setOpen] = useState<boolean>(false);
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className="w-full sm:w-[300px]">
         <div className="font-cursive absolute text-xs"></div>
         <Card className="flex h-[357px] flex-col items-center justify-center overflow-hidden border-2 border-dashed bg-gray-50 shadow-none sm:w-[300px]">
@@ -23,14 +30,14 @@ export default function CreateCard() {
           </p>
         </Card>
       </DialogTrigger>
-      <DialogContent className="w-[95%] rounded-lg">
-        <DialogHeader>
+      <DialogContent className="max-h-screen w-[95%] overflow-y-scroll rounded-lg border-none bg-transparent p-0 py-2">
+        <DialogHeader className="sr-only">
           <DialogTitle>Ajouter un animal</DialogTitle>
           <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            Ce formulaire vous permet d&apos;ajouter nouvel animal
           </DialogDescription>
         </DialogHeader>
+        <AnimalCardCreate setModalState={setOpen} />
       </DialogContent>
     </Dialog>
   );
