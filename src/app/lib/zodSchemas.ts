@@ -4,7 +4,8 @@ export const animalSchema = z.object({
   id: z.string().uuid().optional(),
   name: z
     .string()
-    .min(1, { message: "Vous devez indiquer un nom ou identifiant" }),
+    .min(1, { message: "Veuillez saisir un nom ou un identifiant" })
+    .max(50, { message: "Le nom ne doit pas dépasser 50 caractères" }),
   weight: z.coerce.number(),
   birthDate: z.date().refine(
     (date) => date <= new Date(), // Valide si la date est aujourd'hui ou avant
@@ -13,7 +14,10 @@ export const animalSchema = z.object({
   imgUrl: z.string().optional(),
   sex: z.enum(["male", "female"]),
   healthStatus: z.enum(["healthy", "injured", "sick", "recovering", "unknown"]),
-  note: z.string().optional(),
+  note: z
+    .string()
+    .max(500, { message: "La note ne doit pas dépasser 500 caractères" })
+    .optional(),
   race: z
     .enum(
       [

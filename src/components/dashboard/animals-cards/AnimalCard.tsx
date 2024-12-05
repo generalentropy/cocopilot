@@ -151,7 +151,6 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
             <p className="flex italic">Pas de note</p>
           )}
         </CustomBadge>
-
         <DeleteCardButton animalId={animalData.id} />
       </CardFooter>
     </Card>

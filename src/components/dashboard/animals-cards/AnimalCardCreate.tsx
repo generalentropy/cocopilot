@@ -84,7 +84,7 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
     } else {
       console.log(res.data);
       setModalState(false);
-      toast.success("Carte créee avec succès");
+      toast.success("Animal ajouté avec succès");
     }
     setIsCreating(false);
   }

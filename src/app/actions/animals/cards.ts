@@ -6,29 +6,26 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import prisma from "@/app/lib/db";
 
-// Générer un type TypeScript basé sur le schéma Zod
 type AnimalValidated = z.infer<typeof animalSchema>;
 
 export async function createAnimalCard(animalData: AnimalValidated) {
-  console.log("createAnimalCard server action");
-
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
   if (!user) {
-    return { error: "Unauthorized" };
+    return { error: "Non autorisé" };
   }
 
   const parsedData = animalSchema.safeParse(animalData);
   if (!parsedData.success) {
-    console.log("erreur de validation");
+    console.log("❌ erreur de validation");
 
     return {
-      error: "Invalid query parameters",
+      error: "Paramètres de requête invalides",
     };
   }
 
-  console.log("données validées");
+  console.log("✅ Données carte validées");
 
   try {
     const newAnimal = await prisma.animal.create({
@@ -49,24 +46,47 @@ export async function createAnimalCard(animalData: AnimalValidated) {
 
     return { data: newAnimal };
   } catch (error) {
-    console.error("Erreur lors de la création de l'animal :", error);
-
-    return { error: "Failed to create the animal" };
+    console.error("❌ Erreur lors de la création de l'animal :", error);
+    return { error: "Erreur lors de la création" };
   }
 }
 
-export async function deleteAnimalCard(id: string) {
-  console.log(`id reçu : ${id}`);
+type DeleteAnimalCardResponse = {
+  count?: number;
+  error?: string;
+};
 
-  const animal = await prisma.animal.findUnique({ where: { id: id } });
-  if (!animal) {
-    console.log(id);
-    throw new Error(`Animal with ID ${id} not found`);
+export async function deleteAnimalCard(
+  id: string,
+): Promise<DeleteAnimalCardResponse> {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  const animalId = z.string().uuid();
+
+  const parsedId = animalId.safeParse(id);
+  if (!parsedId.success) {
+    console.log("❌ erreur de validation");
+
+    return {
+      error: "Paramètres de requête invalides",
+    };
   }
 
-  // Supprimez l'animal maintenant que vous êtes sûr du type d'id
-  await prisma.animal.delete({ where: { id: id } });
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
 
-  revalidatePath("/dashboard/animals");
-  console.log("path revalidé");
+  try {
+    const deleteAnimalCard = await prisma.animal.deleteMany({
+      where: { id, userId: user.id },
+    });
+    revalidatePath("/dashboard/animals");
+    console.log("path revalidé");
+
+    return deleteAnimalCard;
+  } catch (error) {
+    console.log(error);
+    return { error: "Erreur lors de la suppression" };
+  }
 }
