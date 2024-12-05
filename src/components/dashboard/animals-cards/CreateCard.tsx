@@ -29,9 +29,9 @@ export default function CreateCard() {
             Ajouter un animal
           </p>
 
-          <p className="mt-2 max-w-[400px] p-2 text-xs font-normal italic text-gray-500">
-            Ajoutez facilement un nouvel animal à votre collection. Vous pourrez
-            modifier ses informations ou le retirer à tout moment.
+          <p className="mt-2 max-w-[400px] px-4 text-xs font-normal italic text-gray-500">
+            Ajoutez un nouvel animal à votre collection. Vous pourrez modifier
+            ses informations ou le retirer à tout moment.
           </p>
         </Card>
       </DialogTrigger>

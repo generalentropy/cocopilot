@@ -59,30 +59,29 @@ type DeleteAnimalCardResponse = {
 export async function deleteAnimalCard(
   id: string,
 ): Promise<DeleteAnimalCardResponse> {
+  // await new Promise((res) => setTimeout(res, 5000));
+
+  // throw new Error("Non autorisé");
+
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
   const animalId = z.string().uuid();
 
   const parsedId = animalId.safeParse(id);
-  if (!parsedId.success) {
-    console.log("❌ erreur de validation");
 
-    return {
-      error: "Paramètres de requête invalides",
-    };
+  if (!parsedId.success) {
+    throw new Error("Paramètres de requête invalides");
   }
 
   if (!user) {
-    return { error: "Unauthorized" };
+    throw new Error("Non autorisé");
   }
 
   try {
     const deleteAnimalCard = await prisma.animal.deleteMany({
       where: { id, userId: user.id },
     });
-    revalidatePath("/dashboard/animals");
-    console.log("path revalidé");
 
     return deleteAnimalCard;
   } catch (error) {
