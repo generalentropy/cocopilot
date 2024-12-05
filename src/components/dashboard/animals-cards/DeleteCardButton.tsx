@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { deleteAnimalCard } from "@/app/actions/animals/cards";
+import { deleteAnimalCard } from "@/app/actions/cards";
 import toast from "react-hot-toast";
 
 export default function DeleteCardButton({ animalId }: { animalId: string }) {

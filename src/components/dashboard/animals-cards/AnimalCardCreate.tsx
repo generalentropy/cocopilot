@@ -41,7 +41,7 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { cn } from "@/app/lib/utils";
 import { chickenBreed } from "@/app/lib/animals";
-import { createAnimalCard } from "@/app/actions/animals/cards";
+import { createAnimalCard } from "@/app/actions/cards";
 import { SubmitCardButton } from "./SubmitCardButton";
 import { useState } from "react";
 import toast from "react-hot-toast";
