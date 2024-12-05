@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Repeat, Trash2 } from "lucide-react";
+import { X } from "lucide-react";
 
 import { useState } from "react";
 import DeleteCardButton from "./DeleteCardButton";
@@ -12,7 +12,7 @@ export default function EditCardButton({ animalId }: { animalId: string }) {
         <div className="group my-4 flex h-9 w-full select-none justify-between">
           <div className="flex gap-2">
             <DeleteCardButton animalId={animalId} />
-            <Button className="bg-amber-500 transition-colors hover:bg-amber-600">
+            <Button className="bg-amber-500 transition-colors hover:bg-amber-500 hover:bg-opacity-95">
               Modifier
             </Button>
           </div>
@@ -21,7 +21,7 @@ export default function EditCardButton({ animalId }: { animalId: string }) {
             size={"icon"}
             onClick={() => setIsEditing((prev) => !prev)}
           >
-            <Repeat />
+            <X />
           </Button>
         </div>
       ) : (

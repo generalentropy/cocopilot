@@ -69,19 +69,7 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
               </div>
             </div>
           </div>
-          {/* <HoverCard openDelay={300}>
-            <HoverCardTrigger className="absolute -right-2 -top-2 z-20 flex cursor-help items-center">
-              <div className="rounded-full bg-green-500 p-1">
-                <BadgeInfo size={20} className="text-white" />
-              </div>
-            </HoverCardTrigger>
-            <HoverCardContent className="w-auto">
-              <p className="text-sm">Nom complet : {animalData.name}</p>
-              <p className="text-sm">
-                Identifiant : {splitUUID(animalData.id)}
-              </p>
-            </HoverCardContent>
-          </HoverCard> */}
+
           <Avatar className="h-16 w-16 ring-4 ring-gray-200">
             <AvatarImage
               className="object-cover"

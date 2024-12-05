@@ -2,12 +2,12 @@
 
 import { animalSchema } from "@/app/lib/zodSchemas";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import prisma from "@/app/lib/db";
 
 type AnimalValidated = z.infer<typeof animalSchema>;
 
+// -> Revoir les erreurs!
 export async function createAnimalCard(animalData: AnimalValidated) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
@@ -41,8 +41,6 @@ export async function createAnimalCard(animalData: AnimalValidated) {
         imgUrl: parsedData.data.imgUrl,
       },
     });
-
-    // revalidatePath("/dashboard/animals");
 
     return { data: newAnimal };
   } catch (error) {
@@ -81,6 +79,7 @@ export async function deleteAnimalCard(
 
     return deleteAnimalCard;
   } catch (error) {
+    console.log(error);
     throw new Error("Erreur lors de la suppression");
   }
 }

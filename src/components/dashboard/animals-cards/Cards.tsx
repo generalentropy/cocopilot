@@ -22,7 +22,7 @@ export default function Cards() {
           <AlertCircle className="h-4 w-4" />
           <AlertTitle className="font-bold">Erreur</AlertTitle>
           <AlertDescription>
-            <p>Une erreur s'est produite lors du chargement des données</p>
+            <p>Une erreur s&apos;est produite lors du chargement des données</p>
             <p>Si le problème persite raffaichissez la page</p>
           </AlertDescription>
         </Alert>
