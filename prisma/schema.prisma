@@ -34,11 +34,21 @@ model Animal {
   healthNotes  String?
   birthDate    DateTime      @default(now())
   User         User?         @relation(fields: [userId], references: [id])
-  userId       String?
+  userId       String
   note         String?
   imgUrl       String?
   sex          Sex?          @default(female)
 }
+
+// model WeightHistory {
+//   id       String   @id @default(uuid())
+//   date     DateTime @default(now())
+//   weight   Int // en grammes
+//   animalId String
+//   animal   Animal   @relation(fields: [animalId], references: [id])
+
+//   @@index([animalId, date], name: "idx_animal_date")
+// }
 
 enum Sex {
   male
@@ -53,7 +63,9 @@ enum HealthStatus {
   unknown // status inconnu
 }
 
+// 🟨🟨🟨 UPDATE lib/animals/chickenBreed !
 enum ChickenBreed {
+  pouleRousse
   leghorn
   isaBrown
   harco

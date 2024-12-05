@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "./AuthProvider";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Cocopilot - Votre assistant de poulailler",
@@ -21,7 +22,10 @@ export default function RootLayout({
   return (
     <AuthProvider>
       <html lang="fr">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <Toaster />
+          {children}
+        </body>
       </html>
     </AuthProvider>
   );

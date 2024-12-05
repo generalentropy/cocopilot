@@ -11,7 +11,6 @@ async function main() {
         name: "Cluck",
         weight: 2000,
         race: "leghorn",
-
         healthStatus: "healthy",
         healthNotes: null,
         birthDate: new Date("2023-11-01"),
@@ -22,7 +21,7 @@ async function main() {
       {
         name: "Feather",
         weight: 1800,
-        race: "isaBrown",
+        race: "pouleRousse",
 
         healthStatus: "recovering",
         healthNotes: "S'est remise d'une blessure à la patte.",

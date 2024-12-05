@@ -4,12 +4,14 @@ import CreateCard from "@/components/dashboard/animals-cards/CreateCard";
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
+export const dynamic = "force-dynamic";
+
 async function getData() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
   const data = await prisma.user.findUnique({
-    where: { id: user.id },
+    where: { id: user?.id },
     include: {
       ownedAnimals: {
         orderBy: { createdAt: "desc" },
@@ -22,8 +24,6 @@ async function getData() {
 
 export default async function Animals() {
   const user = await getData();
-
-  console.log(user);
 
   return (
     <div className="flex flex-wrap gap-4 p-2 sm:p-8">

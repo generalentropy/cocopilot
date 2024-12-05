@@ -28,6 +28,8 @@ import CustomBadge from "../CustomBadge";
 import { calculateAgeInMonths, healthStatus } from "@/app/lib/card";
 import { Separator } from "../../ui/separator";
 import { capitalizeFirstLetter, splitUUID } from "@/app/utils/helpers";
+import { chickenBreed } from "@/app/lib/animals";
+import DeleteCardButton from "./DeleteCardButton";
 
 type AnimalCardProps = {
   animalData: Animal;
@@ -47,6 +49,7 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
     "bg-gray-200 border border-gray-300 text-gray-600";
 
   const ageInMonths = calculateAgeInMonths(animalData.birthDate);
+  const breed = chickenBreed.find((el) => el.value === animalData.race);
 
   return (
     <Card className="w-full overflow-hidden sm:w-[300px]">
@@ -68,9 +71,7 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
 
               <div className="flex items-center">
                 <CustomBadge className="mt-1 rounded-full border border-gray-300 bg-white font-medium text-gray-600">
-                  {animalData.race === "autre"
-                    ? "Non spécifié"
-                    : capitalizeFirstLetter(animalData.race)}
+                  {capitalizeFirstLetter(breed?.label ?? "")}
                 </CustomBadge>
                 {animalData.sex === "male" ? (
                   <div className="ml-2 mt-1 text-blue-300">
@@ -150,6 +151,8 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
             <p className="flex italic">Pas de note</p>
           )}
         </CustomBadge>
+
+        <DeleteCardButton animalId={animalData.id} />
       </CardFooter>
     </Card>
   );

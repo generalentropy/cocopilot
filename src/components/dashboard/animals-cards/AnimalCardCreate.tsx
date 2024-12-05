@@ -41,12 +41,18 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { cn } from "@/app/lib/utils";
 import { chickenBreed } from "@/app/lib/animals";
+import { createAnimalCard } from "@/app/actions/animals/cards";
+import { SubmitCardButton } from "./SubmitCardButton";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 type AnimalCardCreateProps = {
   setModalState: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
+  const [isCreating, setIsCreating] = useState(false);
+
   const statusColors: { [key: string]: string } = {
     healthy: "bg-green-200 border border-green-300 text-green-700",
     injured: "bg-red-200 border border-red-300 text-red-700",
@@ -69,8 +75,18 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
     },
   });
 
-  function onSubmit(values: z.infer<typeof animalSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof animalSchema>) {
+    setIsCreating(true);
+    const res = await createAnimalCard(values);
+    if (res.error) {
+      console.error(res.error);
+      toast.error(res.error);
+    } else {
+      console.log(res.data);
+      setModalState(false);
+      toast.success("Carte créee avec succès");
+    }
+    setIsCreating(false);
   }
 
   const currentHealthStatus = form.watch("healthStatus");
@@ -82,7 +98,7 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
   return (
     <Card className="w-full overflow-hidden rounded-md">
       <CardHeader className="flex-col items-center justify-between border-b bg-gray-50">
-        <div className="flex min-w-full items-center justify-between">
+        <div className="flex min-w-full items-center">
           <h2 className="text-xl font-bold tracking-tight">
             Créer une fiche animal
           </h2>
@@ -271,7 +287,6 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
                         {...field}
                         placeholder="2000"
                         min={0}
-                        step={50}
                       />
                     </FormControl>
                     <FormMessage />
@@ -327,7 +342,7 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
             >
               Annuler
             </Button>
-            <Button type="submit">Enregistrer</Button>
+            <SubmitCardButton isCreating={isCreating} />
           </CardFooter>
         </form>
       </Form>

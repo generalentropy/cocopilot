@@ -15,10 +15,10 @@ import { AnimalCardCreate } from "./AnimalCardCreate";
 import { useState } from "react";
 
 export default function CreateCard() {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setIsOpen] = useState<boolean>(false);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setIsOpen}>
       <DialogTrigger className="w-full sm:w-[300px]">
         <div className="font-cursive absolute text-xs"></div>
         <Card className="flex h-[357px] flex-col items-center justify-center overflow-hidden border-2 border-dashed bg-gray-50 shadow-none sm:w-[300px]">
@@ -39,10 +39,10 @@ export default function CreateCard() {
         <DialogHeader className="sr-only">
           <DialogTitle>Ajouter un animal</DialogTitle>
           <DialogDescription>
-            Ce formulaire vous permet d&apos;ajouter nouvel animal
+            Ce formulaire permet d&apos;ajouter nouvel animal
           </DialogDescription>
         </DialogHeader>
-        <AnimalCardCreate setModalState={setOpen} />
+        <AnimalCardCreate setModalState={setIsOpen} />
       </DialogContent>
     </Dialog>
   );

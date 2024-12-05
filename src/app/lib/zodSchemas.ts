@@ -5,7 +5,7 @@ export const animalSchema = z.object({
   name: z
     .string()
     .min(1, { message: "Vous devez indiquer un nom ou identifiant" }),
-  weight: z.number(),
+  weight: z.coerce.number(),
   birthDate: z.date().refine(
     (date) => date <= new Date(), // Valide si la date est aujourd'hui ou avant
     { message: "La date de naissance n'est pas valide." },
@@ -17,6 +17,7 @@ export const animalSchema = z.object({
   race: z
     .enum(
       [
+        "pouleRousse",
         "leghorn",
         "isaBrown",
         "harco",
