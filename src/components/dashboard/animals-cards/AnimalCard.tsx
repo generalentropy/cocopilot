@@ -6,13 +6,6 @@ import {
 } from "@/components/ui/card";
 
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-
-import {
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -23,13 +16,12 @@ import { TbGenderFemale, TbGenderMale } from "react-icons/tb";
 import { type Animal } from "@prisma/client";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { Heart, Calendar1, Weight, NotepadText, Eye } from "lucide-react";
-
 import CustomBadge from "../CustomBadge";
 import { calculateAgeInMonths, healthStatus } from "@/app/lib/card";
 import { Separator } from "../../ui/separator";
-import { capitalizeFirstLetter, splitUUID } from "@/app/utils/helpers";
+import { capitalizeFirstLetter } from "@/app/utils/helpers";
 import { chickenBreed } from "@/app/lib/animals";
-import DeleteCardButton from "./DeleteCardButton";
+import EditCardButton from "./EditCardButton";
 
 type AnimalCardProps = {
   animalData: Animal;
@@ -52,39 +44,44 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
   const breed = chickenBreed.find((el) => el.value === animalData.race);
 
   return (
-    <Card className="w-full overflow-hidden sm:w-[300px]">
-      <CardHeader className="flex-col items-center justify-between border-b bg-gray-50">
+    <Card className="w-full overflow-hidden transition-colors hover:border-gray-300 sm:w-[300px]">
+      <CardHeader className="relative flex-col items-center justify-between border-b bg-gray-50">
         <div className="flex min-w-full justify-between">
           <div className="flex">
             <div className="flex flex-col items-start">
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger className="max-w-[160px] truncate text-xl font-medium tracking-wider">
-                    {animalData.name?.toLocaleUpperCase()}
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Nom : {animalData.name}</p>
-                    <p>Identifiant : {splitUUID(animalData.id)}</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <div className="max-w-[160px] truncate text-xl font-medium tracking-wider">
+                {animalData.name?.toLocaleUpperCase()}
+              </div>
 
-              <div className="flex items-center">
-                <CustomBadge className="mt-1 rounded-full border border-gray-300 bg-white font-medium text-gray-600">
+              <div className="mt-1 flex items-center">
+                <CustomBadge className="rounded-full border border-gray-300 bg-white font-medium text-gray-600">
                   {capitalizeFirstLetter(breed?.label ?? "")}
                 </CustomBadge>
                 {animalData.sex === "male" ? (
-                  <div className="ml-2 mt-1 text-blue-300">
+                  <div className="ml-2 text-blue-300">
                     <TbGenderMale size={20} />
                   </div>
                 ) : (
-                  <div className="ml-2 mt-1 text-pink-300">
+                  <div className="ml-2 text-pink-300">
                     <TbGenderFemale size={20} />
                   </div>
                 )}
               </div>
             </div>
           </div>
+          {/* <HoverCard openDelay={300}>
+            <HoverCardTrigger className="absolute -right-2 -top-2 z-20 flex cursor-help items-center">
+              <div className="rounded-full bg-green-500 p-1">
+                <BadgeInfo size={20} className="text-white" />
+              </div>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-auto">
+              <p className="text-sm">Nom complet : {animalData.name}</p>
+              <p className="text-sm">
+                Identifiant : {splitUUID(animalData.id)}
+              </p>
+            </HoverCardContent>
+          </HoverCard> */}
           <Avatar className="h-16 w-16 ring-4 ring-gray-200">
             <AvatarImage
               className="object-cover"
@@ -138,10 +135,10 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
               <PopoverTrigger>
                 <p className="group flex cursor-pointer items-center transition-colors hover:text-gray-900 hover:underline">
                   <Eye size={14} className="mr-1" />
-                  Lire la note
+                  Afficher
                 </p>
               </PopoverTrigger>
-              <PopoverContent align="center" className="w-[300px]">
+              <PopoverContent align="end" className="mx-2 w-auto max-w-[310px]">
                 <div className="whitespace-pre-line text-sm">
                   {animalData.note}
                 </div>
@@ -151,7 +148,7 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
             <p className="flex italic">Pas de note</p>
           )}
         </CustomBadge>
-        <DeleteCardButton animalId={animalData.id} />
+        <EditCardButton animalId={animalData.id} />
       </CardFooter>
     </Card>
   );

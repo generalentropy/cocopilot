@@ -4,15 +4,29 @@ import { Button } from "@/components/ui/button";
 import { deleteAnimalCard } from "@/app/actions/cards";
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-
 import { type User, type Animal } from "@prisma/client";
+import { Trash2 } from "lucide-react";
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 type UserWithAnimals = User & {
   ownedAnimals: Animal[];
 };
 
+// https://tanstack.com/query/latest/docs/framework/react/guides/optimistic-updates
 export default function DeleteCardButton({ animalId }: { animalId: string }) {
   const queryClient = useQueryClient();
+  // https://tkdodo.eu/blog/mastering-mutations-in-react-query
   const deleteAnimalMutation = useMutation({
     mutationFn: () => deleteAnimalCard(animalId),
     onSuccess: () => {
@@ -62,15 +76,27 @@ export default function DeleteCardButton({ animalId }: { animalId: string }) {
   });
 
   return (
-    <Button onClick={() => deleteAnimalMutation.mutate()}>
-      {deleteAnimalMutation.isPending ? (
-        <div className="absolute inset-0 flex items-center justify-center rounded bg-gray-200 bg-opacity-50">
-          {/* Spinner */}
-          <div className="h-5 w-5 animate-spin-fast rounded-full border-2 border-white border-t-transparent"></div>
-        </div>
-      ) : (
-        "Supprimer"
-      )}
-    </Button>
+    <AlertDialog>
+      <AlertDialogTrigger>
+        <Button variant={"destructive"}>
+          <Trash2 />
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Êtes-vous absolument sûr ?</AlertDialogTitle>
+          <AlertDialogDescription>
+            Cela supprimera définitivement l'ensemble des données de l'animal de
+            nos serveurs. Cette action est irréversible.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Annuler</AlertDialogCancel>
+          <AlertDialogAction onClick={() => deleteAnimalMutation.mutate()}>
+            Continuer
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }

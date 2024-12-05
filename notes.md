@@ -19,3 +19,7 @@ For the LoginLink and RegisterLink components, it's best to import them from @ki
 ## Popover + modal issue
 
 [Shadcn popover not working in Modal Dialog](https://github.com/shadcn-ui/ui/issues/1511)
+
+## React Query
+
+[Mastering Mutations in React Query](https://tkdodo.eu/blog/mastering-mutations-in-react-query)

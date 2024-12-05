@@ -6,8 +6,6 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 export const dynamic = "force-dynamic";
 
 async function getData() {
-  // await new Promise((res) => setTimeout(res, 3000));
-
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 

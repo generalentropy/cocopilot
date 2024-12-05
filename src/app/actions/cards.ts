@@ -42,7 +42,7 @@ export async function createAnimalCard(animalData: AnimalValidated) {
       },
     });
 
-    revalidatePath("/dashboard/animals");
+    // revalidatePath("/dashboard/animals");
 
     return { data: newAnimal };
   } catch (error) {
@@ -60,14 +60,10 @@ export async function deleteAnimalCard(
   id: string,
 ): Promise<DeleteAnimalCardResponse> {
   // await new Promise((res) => setTimeout(res, 5000));
-
   // throw new Error("Non autorisé");
-
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-
   const animalId = z.string().uuid();
-
   const parsedId = animalId.safeParse(id);
 
   if (!parsedId.success) {
@@ -85,7 +81,6 @@ export async function deleteAnimalCard(
 
     return deleteAnimalCard;
   } catch (error) {
-    console.log(error);
-    return { error: "Erreur lors de la suppression" };
+    throw new Error("Erreur lors de la suppression");
   }
 }

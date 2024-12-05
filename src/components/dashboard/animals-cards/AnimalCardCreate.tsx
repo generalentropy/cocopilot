@@ -45,14 +45,13 @@ import { createAnimalCard } from "@/app/actions/cards";
 import { SubmitCardButton } from "./SubmitCardButton";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type AnimalCardCreateProps = {
   setModalState: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
-  const [isCreating, setIsCreating] = useState(false);
-
   const statusColors: { [key: string]: string } = {
     healthy: "bg-green-200 border border-green-300 text-green-700",
     injured: "bg-red-200 border border-red-300 text-red-700",
@@ -75,25 +74,23 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof animalSchema>) {
-    setIsCreating(true);
-    const res = await createAnimalCard(values);
-    if (res.error) {
-      console.error(res.error);
-      toast.error(res.error);
-    } else {
-      console.log(res.data);
+  const queryClient = useQueryClient();
+  const createNewAnimalMutation = useMutation({
+    mutationFn: (values: z.infer<typeof animalSchema>) =>
+      createAnimalCard(values),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["userData"] });
       setModalState(false);
-      toast.success("Animal ajouté avec succès");
-    }
-    setIsCreating(false);
+      toast.success("Succès");
+    },
+  });
+
+  async function onSubmit(values: z.infer<typeof animalSchema>) {
+    createNewAnimalMutation.mutate(values);
   }
 
   const currentHealthStatus = form.watch("healthStatus");
   const colorClass = statusColors[currentHealthStatus] || statusColors.unknown;
-
-  // const errors = form.formState.errors;
-  // console.log("Erreurs du formulaire :", errors);
 
   return (
     <Card className="w-full overflow-hidden rounded-md">
@@ -342,7 +339,7 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
             >
               Annuler
             </Button>
-            <SubmitCardButton isCreating={isCreating} />
+            <SubmitCardButton isCreating={createNewAnimalMutation.isPending} />
           </CardFooter>
         </form>
       </Form>
