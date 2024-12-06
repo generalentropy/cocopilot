@@ -57,7 +57,7 @@ export default function DeleteCardButton({ animalId }: { animalId: string }) {
     },
     // If the mutation fails,
     // use the context returned from onMutate to roll back
-    onError: (error: any, _, context) => {
+    onError: (error: unknown, _, context) => {
       if (context?.previousUserData) {
         queryClient.setQueryData(["userData"], context.previousUserData);
       }
@@ -84,10 +84,10 @@ export default function DeleteCardButton({ animalId }: { animalId: string }) {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Êtes-vous absolument sûr ?</AlertDialogTitle>
+          <AlertDialogTitle>Êtes-vous sûr ?</AlertDialogTitle>
           <AlertDialogDescription>
-            Cela supprimera définitivement l'ensemble des données de l'animal de
-            nos serveurs. Cette action est irréversible.
+            Cela supprimera définitivement l&apos;ensemble des données de
+            l&apos;animal. Cette action est irréversible.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
