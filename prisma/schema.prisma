@@ -63,7 +63,7 @@ enum HealthStatus {
   unknown // status inconnu
 }
 
-// 🟨🟨🟨 UPDATE lib/animals/chickenBreed !
+// 🟨🟨🟨 Keep lib/animals/chickenBreed in sync!
 enum ChickenBreed {
   pouleRousse
   leghorn

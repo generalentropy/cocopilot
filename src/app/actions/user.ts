@@ -4,6 +4,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "../lib/db";
 
 export async function getUserData() {
+  console.log("GET USER DATA");
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
