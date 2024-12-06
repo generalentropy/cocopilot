@@ -13,19 +13,13 @@ export async function createAnimalCard(animalData: AnimalValidated) {
   const user = await getUser();
 
   if (!user) {
-    return { error: "Non autorisé" };
+    throw new Error("Non autorisé");
   }
 
   const parsedData = animalSchema.safeParse(animalData);
   if (!parsedData.success) {
-    console.log("❌ erreur de validation");
-
-    return {
-      error: "Paramètres de requête invalides",
-    };
+    throw new Error("Paramètres de requête invalides");
   }
-
-  console.log("✅ Données carte validées");
 
   try {
     const newAnimal = await prisma.animal.create({
@@ -44,8 +38,8 @@ export async function createAnimalCard(animalData: AnimalValidated) {
 
     return { data: newAnimal };
   } catch (error) {
-    console.error("❌ Erreur lors de la création de l'animal :", error);
-    return { error: "Erreur lors de la création" };
+    console.log(error);
+    throw new Error("Erreur lors de la création");
   }
 }
 

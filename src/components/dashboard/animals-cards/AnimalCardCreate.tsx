@@ -43,7 +43,6 @@ import { cn } from "@/app/lib/utils";
 import { chickenBreed } from "@/app/lib/animals";
 import { createAnimalCard } from "@/app/actions/cards";
 import { SubmitCardButton } from "./SubmitCardButton";
-import { useState } from "react";
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -81,8 +80,9 @@ export function AnimalCardCreate({ setModalState }: AnimalCardCreateProps) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["userData"] });
       setModalState(false);
-      toast.success("Succès");
+      toast.success("Ajouté avec succès");
     },
+    onError: (e) => toast.error(e.message),
   });
 
   async function onSubmit(values: z.infer<typeof animalSchema>) {
