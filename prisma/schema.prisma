@@ -96,6 +96,6 @@ enum ChickenBreed {
   chabo
   barbuDUccle
   bantamDeHollande
-  autre // race connue mais non présente
-  unknown // Inconnue par l'user
+  autre
+  unknown
 }

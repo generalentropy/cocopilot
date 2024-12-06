@@ -1,4 +1,11 @@
-import { LayoutDashboard, HeartPulse, Wheat, Egg, Fence } from "lucide-react";
+import {
+  LayoutDashboard,
+  HeartPulse,
+  Wheat,
+  Egg,
+  Fence,
+  Settings2,
+} from "lucide-react";
 
 export const dashboardMenu = [
   { id: 0, name: "accueil", href: "/dashboard" },
@@ -50,6 +57,31 @@ export const menuData = {
           color: "amber",
         },
       ],
+    },
+  ],
+};
+
+export const sidebarSettings = {
+  title: "Réglages",
+  url: "#",
+  icon: Settings2,
+  color: "amber",
+  items: [
+    {
+      title: "Charger les données de test",
+      url: "#",
+    },
+    {
+      title: "Team",
+      url: "#",
+    },
+    {
+      title: "Billing",
+      url: "#",
+    },
+    {
+      title: "Limits",
+      url: "#",
     },
   ],
 };

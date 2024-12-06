@@ -14,11 +14,18 @@ import {
 } from "@/components/ui/sidebar";
 
 import { NavUser } from "../nav-user";
-import { menuData } from "@/app/lib/menu";
+import { menuData, sidebarSettings } from "@/app/lib/menu";
 import Link from "next/link";
 import { capitalizeFirstLetter } from "@/app/utils/helpers";
 import { usePathname } from "next/navigation";
 import DashboardLogo from "../DashboardLogo";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { ChevronRight } from "lucide-react";
+import SeedDummyData from "../SeedDummyData";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
@@ -58,6 +65,45 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarGroupContent>
           </SidebarGroup>
         ))}
+        <Collapsible
+          key={sidebarSettings.title}
+          title={sidebarSettings.title}
+          className="group/collapsible"
+        >
+          <SidebarGroup>
+            <SidebarGroupLabel
+              asChild
+              className="group/label text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+            >
+              <CollapsibleTrigger>
+                {<sidebarSettings.icon className="mr-2" />}
+                <p> {sidebarSettings.title}</p>
+                <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
+              </CollapsibleTrigger>
+            </SidebarGroupLabel>
+            <CollapsibleContent>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <SeedDummyData />
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  {/* <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <SeedDummyData />
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <SeedDummyData />
+                    </SidebarMenuButton>
+                  </SidebarMenuItem> */}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </CollapsibleContent>
+          </SidebarGroup>
+        </Collapsible>
       </SidebarContent>
       <SidebarFooter>
         <NavUser />
