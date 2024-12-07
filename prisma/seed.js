@@ -1,8 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
-
-// kp_f05a9e4c58e6448db28e32e46881f032  // Alane
-// kp_3c1f52aace8c45c8813b7f8b6627d93b   // Eddy
+// import { PrismaClient } from "@prisma/client";
+// const prisma = new PrismaClient();
 
 export const dummyData = [
   {
@@ -126,19 +123,21 @@ export const dummyData = [
   },
 ];
 
-async function main() {
-  await prisma.animal.createMany({
-    data: dummyData,
-  });
+// async function main() {
+//   await prisma.animal.createMany({
+//     data: dummyData,
+//   });
 
-  console.log("Seed data for animals created!");
-}
+//   console.log("Seed data for animals created!");
+// }
 
-main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+// if (require.main === module) {
+//   main()
+//     .catch((e) => {
+//       console.error(e);
+//       process.exit(1);
+//     })
+//     .finally(async () => {
+//       await prisma.$disconnect();
+//     });
+// }

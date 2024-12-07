@@ -15,7 +15,8 @@ export async function getUserData() {
     where: { id: user?.id },
     include: {
       ownedAnimals: {
-        orderBy: { createdAt: "desc" },
+        // Ajout du tri par id pour garder une cohérence comme les données viennent du seed
+        orderBy: [{ createdAt: "desc" }, { id: "asc" }],
       },
     },
   });
@@ -24,7 +25,6 @@ export async function getUserData() {
 }
 
 export async function seedDummyData() {
-  console.log("Seeding dummy animals data");
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
@@ -44,6 +44,9 @@ export async function seedDummyData() {
     await prisma.animal.createMany({
       data: dataWithUserId,
     });
+    console.log(
+      `Début du seed pour l'utilisateur ${user.id} à ${new Date().toISOString()}`,
+    );
   } catch (error) {
     console.error(`Erreur lors du seed ${error}`);
     throw new Error("Erreur lors de l'envoi des données");

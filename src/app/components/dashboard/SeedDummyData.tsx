@@ -9,7 +9,10 @@ export default function SeedDummyData() {
   const queryClient = useQueryClient();
 
   const seedDummyDataMutation = useMutation({
-    mutationFn: () => seedDummyData(),
+    mutationFn: () => {
+      console.log("Début du seed des données...");
+      return seedDummyData();
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["userData"] });
       toast.success("Données chargées avec succès 🎉");

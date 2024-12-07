@@ -43,11 +43,17 @@ export default function DeleteCardButton({ animalId }: { animalId: string }) {
         (oldData: UserWithAnimals | undefined) => {
           if (!oldData) return oldData; // Vérifiez que les données existent
 
+          const sortedAnimals = oldData.ownedAnimals
+            .filter((animal) => animal.id !== animalId)
+            .sort(
+              (a, b) =>
+                new Date(b.createdAt).getTime() -
+                  new Date(a.createdAt).getTime() || (a.id > b.id ? 1 : -1), // Tri secondaire par ID si les timestamps sont similaires (seed)
+            );
+
           return {
             ...oldData,
-            ownedAnimals: oldData.ownedAnimals.filter(
-              (animal) => animal.id !== animalId,
-            ),
+            ownedAnimals: sortedAnimals,
           };
         },
       );
