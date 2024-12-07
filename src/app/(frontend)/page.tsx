@@ -1,4 +1,4 @@
-import OnBoarding from "@/components/front/Onboarding";
+import OnBoarding from "@/app/components/front/Onboarding";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 

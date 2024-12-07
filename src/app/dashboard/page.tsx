@@ -1,10 +1,10 @@
-import { AnnualProductionBarData } from "@/components/dashboard/overview/AnnualProduction";
+import { AnnualProductionBarData } from "@/app/components/dashboard/overview/AnnualProduction";
 
 export default function Dashboard() {
   return (
     <>
-      <div className="flex flex-1 flex-col gap-4 p-4">
-        <div className="grid auto-rows-min gap-4 lg:grid-cols-3">
+      <div className="flex flex-1 flex-col gap-8 p-8">
+        <div className="grid auto-rows-min gap-8 lg:grid-cols-3">
           <div className="aspect-video rounded-xl bg-muted/50">
             <AnnualProductionBarData />
           </div>

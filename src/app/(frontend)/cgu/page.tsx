@@ -1,4 +1,4 @@
-import { TermsAndConditions } from "@/components/front/Cgu";
+import { TermsAndConditions } from "@/app/components/front/Cgu";
 
 export default function page() {
   return (

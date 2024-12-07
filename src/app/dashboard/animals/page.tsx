@@ -1,4 +1,4 @@
-import Cards from "@/components/dashboard/animals-cards/Cards";
+import Cards from "@/app/components/dashboard/animals-cards/Cards";
 
 export default function Animals() {
   return (

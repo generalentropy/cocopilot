@@ -1,5 +1,5 @@
-import Footer from "@/components/front/Footer";
-import Header from "@/components/front/Header";
+import Footer from "@/app/components/front/Footer";
+import Header from "@/app/components/front/Header";
 import { ReactNode } from "react";
 
 export default async function FrontLayout({

@@ -1,13 +1,13 @@
-import { AppSidebar } from "@/components/dashboard/sidebar/App-sidebar";
-import BreadcrumbNav from "@/components/dashboard/Breadcrumb-nav";
-import { TailwindIndicator } from "@/components/dashboard/TailwindIndicator";
+import { AppSidebar } from "@/app/components/dashboard/sidebar/App-sidebar";
+import BreadcrumbNav from "@/app/components/dashboard/Breadcrumb-nav";
+import { TailwindIndicator } from "@/app/components/dashboard/TailwindIndicator";
 
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/app/components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
+} from "@/app/components/ui/sidebar";
 import { ReactNode } from "react";
 import {
   dehydrate,

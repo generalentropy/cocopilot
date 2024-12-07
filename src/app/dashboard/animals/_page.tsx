@@ -1,6 +1,6 @@
 import prisma from "@/app/lib/db";
-import { AnimalCard } from "@/components/dashboard/animals-cards/AnimalCard";
-import CreateCard from "@/components/dashboard/animals-cards/CreateCard";
+import { AnimalCard } from "@/app/components/dashboard/animals-cards/AnimalCard";
+import CreateCard from "@/app/components/dashboard/animals-cards/CreateCard";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export const dynamic = "force-dynamic";
