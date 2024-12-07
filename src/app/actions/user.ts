@@ -2,8 +2,8 @@
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "../lib/db";
-import { dummyData } from "../../../prisma/seed";
 import { HealthStatus, Sex, type ChickenBreed } from "@prisma/client";
+import { dummyData } from "../data/dummy";
 
 export async function getUserData() {
   const { getUser } = getKindeServerSession();
