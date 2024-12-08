@@ -28,7 +28,6 @@ model Animal {
   id           String        @id @default(uuid())
   createdAt    DateTime      @default(now())
   name         String?
-  weight       Int? // en grammes
   race         ChickenBreed  @default(unknown)
   healthStatus HealthStatus? // optionnel / nullable
   healthNotes  String?
@@ -38,17 +37,17 @@ model Animal {
   note         String?
   imgUrl       String?
   sex          Sex?          @default(female)
+
+  weights WeightRecord[]
 }
 
-// model WeightHistory {
-//   id       String   @id @default(uuid())
-//   date     DateTime @default(now())
-//   weight   Int // en grammes
-//   animalId String
-//   animal   Animal   @relation(fields: [animalId], references: [id])
-
-//   @@index([animalId, date], name: "idx_animal_date")
-// }
+model WeightRecord {
+  id         String   @id @default(uuid())
+  weight     Int // en grammes
+  recordedAt DateTime @default(now())
+  animalId   String
+  Animal     Animal   @relation(fields: [animalId], references: [id], onDelete: Cascade)
+}
 
 enum Sex {
   male

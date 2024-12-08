@@ -30,9 +30,17 @@ export async function createAnimalCard(animalData: AnimalValidated) {
         sex: parsedData.data.sex,
         healthStatus: parsedData.data.healthStatus,
         birthDate: parsedData.data.birthDate,
-        weight: parsedData.data.weight,
         note: parsedData.data.note,
         imgUrl: parsedData.data.imgUrl,
+
+        weights: {
+          create: {
+            weight: parsedData.data.weight,
+          },
+        },
+      },
+      include: {
+        weights: true, // inclure les poids dans la réponse
       },
     });
 

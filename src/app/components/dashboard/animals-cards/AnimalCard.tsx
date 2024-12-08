@@ -13,7 +13,6 @@ import {
 
 import { TbGenderFemale, TbGenderMale } from "react-icons/tb";
 
-import { type Animal } from "@prisma/client";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { Heart, Calendar1, Weight, NotepadText, Eye } from "lucide-react";
 import CustomBadge from "../CustomBadge";
@@ -22,10 +21,11 @@ import { Separator } from "../../ui/separator";
 import { capitalizeFirstLetter } from "@/app/utils/helpers";
 import { chickenBreed } from "@/app/lib/animals";
 import EditCardButton from "./EditCardButton";
+import { AnimalWithWeights } from "@/app/types/types";
 
-type AnimalCardProps = {
-  animalData: Animal;
-};
+interface AnimalCardProps {
+  animalData: AnimalWithWeights & { latestWeight: number | null };
+}
 
 export function AnimalCard({ animalData }: AnimalCardProps) {
   const statusColors: { [key: string]: string } = {
@@ -42,6 +42,8 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
 
   const ageInMonths = calculateAgeInMonths(animalData.birthDate);
   const breed = chickenBreed.find((el) => el.value === animalData.race);
+
+  console.log(animalData);
 
   return (
     <Card className="w-full overflow-hidden transition-colors hover:border-gray-300 sm:w-[300px]">
@@ -108,7 +110,7 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
             <span>Poids</span>
           </div>
           <CustomBadge className="bg-gray-500">
-            {animalData.weight}g
+            {animalData.weights[0]?.weight}g
           </CustomBadge>
         </div>
       </CardContent>

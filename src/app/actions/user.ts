@@ -11,12 +11,13 @@ export async function getUserData() {
 
   if (!user) return null;
 
+  // Ajout du tri par id pour garder une cohérence quand les données viennent du seed et possèdent un timestamp similaire (éviter les incohérences avec optimistic update)
   const data = await prisma.user.findUnique({
     where: { id: user?.id },
     include: {
       ownedAnimals: {
-        // Ajout du tri par id pour garder une cohérence comme les données viennent du seed
         orderBy: [{ createdAt: "desc" }, { id: "asc" }],
+        include: { weights: { orderBy: { recordedAt: "desc" } } },
       },
     },
   });
@@ -33,17 +34,44 @@ export async function seedDummyData() {
   }
 
   const dataWithUserId = dummyData.map((item) => ({
-    ...item,
+    name: item.name,
     userId: user.id,
     race: item.race as ChickenBreed,
     healthStatus: item.healthStatus as HealthStatus,
     sex: item.sex as Sex,
+    imgUrl: item.imgUrl,
+    birthDate: item.birthDate,
+    note: item.note,
+
+    weight: item.weight,
   }));
 
   try {
-    await prisma.animal.createMany({
-      data: dataWithUserId,
-    });
+    await prisma.$transaction(
+      dataWithUserId.map((item) =>
+        prisma.animal.create({
+          data: {
+            userId: item.userId,
+            name: item.name,
+            race: item.race,
+            sex: item.sex,
+            healthStatus: item.healthStatus as HealthStatus,
+            birthDate: item.birthDate,
+            note: item.note,
+            imgUrl: item.imgUrl,
+
+            // Création simultanée de WeightRecord
+            weights: {
+              create: {
+                weight: item.weight,
+                // recordedAt: new Date(), // Optionnel, défini par défaut dans le modèle
+              },
+            },
+          },
+        }),
+      ),
+    );
+
     console.log(
       `Début du seed pour l'utilisateur ${user.id} à ${new Date().toISOString()}`,
     );

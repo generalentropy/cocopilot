@@ -30,7 +30,10 @@ export default function Cards() {
           <AlertTitle className="font-bold">Erreur</AlertTitle>
           <AlertDescription>
             <p>Une erreur s&apos;est produite lors du chargement des données</p>
-            <p>Si le problème persite raffaichissez la page</p>
+            <p>
+              Il vous suffit en général d&apos;actualiser la page pour corriger
+              l&apos;erreur
+            </p>
           </AlertDescription>
         </Alert>
 
