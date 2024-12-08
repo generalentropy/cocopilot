@@ -86,7 +86,7 @@ export const dummyData = [
     name: "Mellow",
     weight: 1900,
     race: "cornish",
-    healthStatus: "sick",
+    healthStatus: "healthy",
     healthNotes: "Problème intestinal détecté.",
     birthDate: new Date("2023-05-18"),
     userId: "kp_3c1f52aace8c45c8813b7f8b6627d93b",

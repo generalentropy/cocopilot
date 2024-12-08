@@ -24,7 +24,7 @@ import EditCardButton from "./EditCardButton";
 import { AnimalWithWeights } from "@/app/types/types";
 
 interface AnimalCardProps {
-  animalData: AnimalWithWeights & { latestWeight: number | null };
+  animalData: AnimalWithWeights;
 }
 
 export function AnimalCard({ animalData }: AnimalCardProps) {
@@ -42,8 +42,6 @@ export function AnimalCard({ animalData }: AnimalCardProps) {
 
   const ageInMonths = calculateAgeInMonths(animalData.birthDate);
   const breed = chickenBreed.find((el) => el.value === animalData.race);
-
-  console.log(animalData);
 
   return (
     <Card className="w-full overflow-hidden transition-colors hover:border-gray-300 sm:w-[300px]">

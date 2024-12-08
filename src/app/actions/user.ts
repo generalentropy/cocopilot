@@ -4,8 +4,9 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "../lib/db";
 import { HealthStatus, Sex, type ChickenBreed } from "@prisma/client";
 import { dummyData } from "../data/dummy";
+import { UserData } from "../types/types";
 
-export async function getUserData() {
+export async function getUserData(): Promise<UserData | null> {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
@@ -79,4 +80,19 @@ export async function seedDummyData() {
     console.error(`Erreur lors du seed ${error}`);
     throw new Error("Erreur lors de l'envoi des données");
   }
+}
+
+export async function getOwnedAnimalsCount(): Promise<number | null> {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user) return null;
+
+  const count = await prisma.animal.count({
+    where: {
+      userId: user.id,
+    },
+  });
+
+  return count;
 }

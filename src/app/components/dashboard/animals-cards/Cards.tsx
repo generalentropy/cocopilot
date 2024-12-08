@@ -8,9 +8,10 @@ import { Alert, AlertDescription, AlertTitle } from "@/app/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import CardsLoader from "@/app/components/dashboard/animals-cards/CardsLoader";
+import { UserData } from "@/app/types/types";
 
 export default function Cards() {
-  const { data, error, isLoading } = useQuery({
+  const { data, error, isLoading } = useQuery<UserData | null>({
     queryKey: ["userData"],
     queryFn: async () => getUserData(),
   });
