@@ -85,7 +85,7 @@ export function NavUser() {
                 <Avatar className="h-8 w-8 rounded-full">
                   <AvatarImage
                     referrerPolicy="no-referrer"
-                    src={user?.picture ?? "/default-avatar.png"}
+                    src={user?.picture || undefined}
                     alt={user?.given_name || "Avatar de l'utilisateur"}
                   />
                   <AvatarFallback
