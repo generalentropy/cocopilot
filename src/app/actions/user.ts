@@ -16,6 +16,9 @@ export async function getUserData(): Promise<UserData | null> {
   const data = await prisma.user.findUnique({
     where: { id: user?.id },
     include: {
+      productions: {
+        orderBy: { date: "desc" },
+      },
       ownedAnimals: {
         orderBy: [{ createdAt: "desc" }, { id: "asc" }],
         include: { weights: { orderBy: { recordedAt: "desc" } } },

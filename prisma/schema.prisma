@@ -23,7 +23,7 @@ model User {
 
   ownedAnimals Animal[]
 
-  Production Production[]
+  productions Production[]
 }
 
 model Production {
@@ -32,7 +32,6 @@ model Production {
   quantity  Int
   user      User     @relation(fields: [userId], references: [id])
   userId    String
-  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
@@ -58,7 +57,7 @@ model WeightRecord {
   weight     Int // en grammes
   recordedAt DateTime @default(now())
   animalId   String
-  Animal     Animal   @relation(fields: [animalId], references: [id], onDelete: Cascade)
+  animal     Animal   @relation(fields: [animalId], references: [id], onDelete: Cascade)
 }
 
 enum Sex {

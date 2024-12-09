@@ -18,6 +18,15 @@ export type AnimalWithWeights = Prisma.AnimalGetPayload<{
 
 export type UserData = Prisma.UserGetPayload<{
   include: {
+    productions: {
+      select: {
+        id: true;
+        date: true;
+        quantity: true;
+        updatedAt: true;
+      };
+      orderBy: { date: "desc" };
+    };
     ownedAnimals: {
       include: {
         weights: {
