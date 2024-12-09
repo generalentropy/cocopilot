@@ -1,3 +1,9 @@
+import { ProductionJournaliere } from "@/app/components/dashboard/production/aroductionForm";
+
 export default function Production() {
-  return <div>Ma production</div>;
+  return (
+    <div>
+      <ProductionJournaliere />
+    </div>
+  );
 }
